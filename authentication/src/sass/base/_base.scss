@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Ubuntu", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+h3 {
+  font-size: 4.5rem;
+  color: var(--font-color);
+}
+
+p {
+  color: var(--font-color);
+  font-size: 1.5rem;
+}

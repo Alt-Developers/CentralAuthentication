@@ -1,0 +1,127 @@
+.login {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    position: relative;
+
+    &__logo {
+        z-index: 150;
+        width: 15rem;
+        height: 15rem;
+        position: fixed;
+        right: 2rem;
+        top: 2rem;
+
+        @include respond(phone) {
+            display: none;
+        }
+    }
+
+    &__rectangle {
+        // background: ;
+        background-color: #FF5252;
+        height: 100%;
+        width: 115%;
+        position: fixed;
+        left: -15%;
+        top: 0;
+        transform: skew(0deg, 45deg);
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    &__modal {
+        position: relative;
+        background-color: var(--gray-light-1);
+        border-radius: 1.1rem;
+        height: 50rem;
+        width: 40rem;
+        padding: 2rem;
+        z-index: 10;
+
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+
+        @include respond(phone) {
+            position: absolute;
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+            border-radius: 0;
+        }
+    }
+
+    &__text {
+        margin-bottom: 2rem;
+    }
+
+    &__form {
+        input {
+            background-color: var(--gray-light-3);
+            border: none;
+            padding: 1.5rem;
+            width: 100%;
+            border-radius: 1.1rem;
+            margin-bottom: .5rem;
+            margin-top: 1rem;
+            color: var(--font-color);
+            transition: all .1s cubic-bezier(0.61, 1, 0.88, 1);
+
+            &:focus {
+                box-shadow: 0px 0px 20px var(--font-color);
+                border: var(--font-color) 3px solid;
+            }
+        }
+
+        label {
+            transition: all .2s;
+            color: var(--font-color);
+        }
+
+        a {
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            color: grey;
+
+            &:hover {
+                // border-bottom: grey 2px solid;
+                text-decoration: underline;
+            }
+        }
+
+        button {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            border: none;
+            background-color: #FF5252;
+            padding: 2rem;
+            width: 90%;
+            border-radius: 1.1rem;
+            height: 7rem;
+            color: white;
+            font-size: 2.5rem;
+            transition: all .3s;
+
+            &:hover {
+                box-shadow: 0px 0px 20px #FF5252;
+            }
+
+            &:active {
+                transform: scale(.85);
+            }
+        }
+    }
+
+    &__footer {
+        z-index: 100;
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        text-align: right;
+        opacity: 50%;
+        
+        p {
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+    }
+}

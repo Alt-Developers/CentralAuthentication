@@ -51,6 +51,10 @@
 
     &__text {
         margin-bottom: 2rem;
+
+        p {
+            margin-top: 1rem;
+        }
     }
 
     &__form {
@@ -118,6 +122,10 @@
         right: 2rem;
         text-align: right;
         opacity: 50%;
+
+        @include respond(phone) {
+            display: none;
+        }
         
         p {
             font-weight: 800;

@@ -1,0 +1,30 @@
+.btn {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    border: none;
+    background-color: #FF5252;
+    padding: 2rem;
+    width: 90%;
+    border-radius: 1.1rem;
+    height: 7rem;
+    color: white;
+    transition: all .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    text-decoration: none;
+    
+    i {
+        font-size: 2.5rem;
+    }
+
+    &:hover {
+        box-shadow: 0px 0px 20px #FF5252;
+    }
+
+    &:active {
+        transform: scale(.85);
+    }
+}

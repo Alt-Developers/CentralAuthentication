@@ -1,10 +1,11 @@
 import { useFormik } from "formik";
 import logo from "../assets/img/ssLogo.png";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = props => {
   const { service: params } = useParams();
-  const allowedParams = [":timetables", ":system13"];
+  const allowedParams = ["timetables", "system13"];
 
   const validate = values => {
     const errors = {};
@@ -51,12 +52,12 @@ const Login = props => {
         .then(data => {
           localStorage.setItem("token", data.token);
           switch (params) {
-            case ":timetables":
+            case "timetables":
               window.location.href = `http://localhost:3001/token/:${localStorage.getItem(
                 "token"
               )}`;
               break;
-            case ":system13":
+            case "system13":
               console.log("SYSTEM13");
               break;
             default:
@@ -107,12 +108,26 @@ const Login = props => {
           </form>
         </div>
       ) : (
-        <div className="login__modal">
-          <div className="login__text">
-            <h3>ERROR</h3>
-            <p>Please select your service to get started.</p>
+        <>
+          <div className="login__modal">
+            <div className="login__text">
+              <h3>Right Service?</h3>
+              <p>
+                This is the SS Central Authentication system. You can only login
+                to the following.
+              </p>
+            </div>
+            <Link to="/login/timetables" className="btn">
+              To Timetables login page<i className="bx bxs-chevrons-right"></i>
+            </Link>
           </div>
-        </div>
+          <div className="login__footer">
+            <p>
+              All rights reserved &copy; 2022 <br />
+              Central Authentication System
+            </p>
+          </div>
+        </>
       )}
 
       <div className="login__footer">

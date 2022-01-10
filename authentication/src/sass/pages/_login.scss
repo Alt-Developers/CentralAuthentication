@@ -18,8 +18,7 @@
     }
 
     &__rectangle {
-        // background: ;
-        background-color: #FF5252;
+        transition: all .4s;
         height: 100%;
         width: 115%;
         position: fixed;
@@ -27,6 +26,7 @@
         top: 0;
         transform: skew(0deg, 45deg);
         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+        background-color: #FF5252;
     }
 
     &__modal {
@@ -43,8 +43,8 @@
         @include respond(phone) {
             position: absolute;
             bottom: 0;
-            height: 100%;
-            width: 100%;
+            height: 100vh;
+            width: 100vw;
             border-radius: 0;
         }
     }

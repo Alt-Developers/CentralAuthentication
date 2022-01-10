@@ -99,7 +99,7 @@ p {
   }
 }
 .login__rectangle {
-  background-color: #FF5252;
+  transition: all 0.4s;
   height: 100%;
   width: 115%;
   position: fixed;
@@ -107,6 +107,7 @@ p {
   top: 0;
   transform: skew(0deg, 45deg);
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  background-color: #FF5252;
 }
 .login__modal {
   position: relative;
@@ -122,8 +123,8 @@ p {
   .login__modal {
     position: absolute;
     bottom: 0;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     border-radius: 0;
   }
 }
@@ -196,6 +197,115 @@ p {
 .login__footer p {
   font-weight: 800;
   font-size: 1.5rem;
+}
+
+.signup {
+  width: 100rem;
+  height: 60rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .signup {
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    border-radius: 0;
+    overflow-y: scroll;
+  }
+}
+.signup__imgWrapper {
+  grid-area: "image";
+  background-color: var(--gray-light-3);
+  padding: 1.5rem;
+  width: 100%;
+  border-radius: 0 0 1.1rem 1.1rem;
+  color: var(--font-color);
+  transition: all 0.1s cubic-bezier(0.61, 1, 0.88, 1);
+  height: fit-content;
+  border: none;
+  position: relative;
+  margin-top: -2rem;
+  font-size: 3rem;
+}
+.signup__imgWrapper img {
+  border-radius: 2rem;
+  object-fit: cover;
+}
+.signup__img {
+  left: 0;
+  top: 0;
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+.signup__form {
+  display: grid;
+  grid-template-areas: "firstname lastname" "email color" "pass image";
+  width: 100%;
+  column-gap: 2rem;
+  row-gap: 1.5rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .signup__form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.signup__form--input {
+  background-color: var(--gray-light-3);
+  border: none;
+  padding: 1.5rem;
+  width: 100%;
+  border-radius: 1.1rem;
+  color: var(--font-color);
+  transition: all 0.1s cubic-bezier(0.61, 1, 0.88, 1);
+  height: 6rem;
+}
+.signup__form--input:focus {
+  box-shadow: 0px 0px 20px var(--gray-light-3);
+  border: var(--gray-light-3) 3px solid;
+}
+.signup__form--color {
+  grid-area: "color";
+}
+.signup__form label {
+  transition: all 0.2s;
+  color: var(--font-color);
+}
+.signup__form a {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: grey;
+}
+.signup__form a:hover {
+  text-decoration: underline;
+}
+.signup__form--button {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  border: none;
+  padding: 2rem;
+  width: 90%;
+  border-radius: 1.1rem;
+  height: 7rem;
+  color: white;
+  font-size: 2.5rem;
+  transition: all 0.3s;
+  width: 96%;
+}
+@media only screen and (max-width: 37.5em) {
+  .signup__form--button {
+    position: initial;
+    width: 100%;
+  }
+}
+.signup__form--button:hover {
+  box-shadow: 0px 0px 20px inherit;
+}
+.signup__form--button:active {
+  transform: scale(0.85);
 }
 
 /*# sourceMappingURL=main.css.map */

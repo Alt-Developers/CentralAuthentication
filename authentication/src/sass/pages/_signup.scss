@@ -1,0 +1,122 @@
+.signup {
+    width: 100rem;
+    height: 60rem;
+
+    @include respond(phone) {
+        position: absolute;
+        top: 0;
+        height: 100vh;
+        width: 100vw;
+        border-radius: 0;
+        overflow-y: scroll;
+    }
+
+    &__imgWrapper {
+        grid-area: "image";
+        background-color: var(--gray-light-3);
+        padding: 1.5rem;
+        width: 100%;
+        border-radius:  0 0 1.1rem 1.1rem;
+        color: var(--font-color);
+        transition: all .1s cubic-bezier(0.61, 1, 0.88, 1);
+        height: fit-content;
+        border: none;
+        position: relative;
+        margin-top: -2rem;
+        font-size: 3rem;
+
+        img {
+            border-radius:2rem;
+            object-fit: cover;
+        }
+    }
+
+    &__img {
+        left: 0;
+        top: 0;
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+
+    &__form {
+        display: grid;
+        grid-template-areas: "firstname lastname"
+                            "email color"
+                            "pass image";
+        width: 100%;
+        @include respond(phone) {
+            display: flex;
+            flex-direction: column;
+        }
+
+        column-gap: 2rem;
+        row-gap: 1.5rem;
+
+        &--input {
+            background-color: var(--gray-light-3);
+            border: none;
+            padding: 1.5rem;
+            width: 100%;
+            border-radius: 1.1rem;
+            color: var(--font-color);
+            transition: all .1s cubic-bezier(0.61, 1, 0.88, 1);
+            height: 6rem;
+
+            &:focus {
+                box-shadow: 0px 0px 20px var(--gray-light-3);
+                border: var(--gray-light-3) 3px solid;
+            }
+        }
+
+        &--color {
+            grid-area: "color";
+        }
+
+        label {
+            transition: all .2s;
+            color: var(--font-color);
+        }
+
+        a {
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            color: grey;
+
+            &:hover {
+                // border-bottom: grey 2px solid;
+                text-decoration: underline;
+            }
+        }
+
+        &--button {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            border: none;
+            padding: 2rem;
+            width: 90%;
+            border-radius: 1.1rem;
+            height: 7rem;
+            color: white;
+            font-size: 2.5rem;
+            transition: all .3s;
+            width: 96%;
+
+            @include respond(phone) {
+                position: initial;
+                width: 100%;
+            }
+
+            &:hover {
+                box-shadow: 0px 0px 20px inherit;
+            }
+
+            &:active {
+                transform: scale(.85);
+            }
+        }
+    }
+}

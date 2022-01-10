@@ -2,16 +2,20 @@ import { useFormik } from "formik";
 import logo from "../assets/img/ssLogo.png";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { CirclePicker } from "react-color";
+import { useState } from "react";
 
-const Login = props => {
+const Signup = props => {
   const { service: params } = useParams();
   const allowedParams = ["timetables", "system13"];
+  const [selectedColor, setSelectedColor] = useState("#FF5252");
+  const [image, setImage] = useState(null);
 
   const validate = values => {
     const errors = {};
 
     if (!values.email) {
-      errors.email = "Required";
+      errors.email = "Email Required";
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
@@ -23,6 +27,11 @@ const Login = props => {
     }
 
     return errors;
+  };
+
+  const colorChangeHandler = color => {
+    setSelectedColor(color);
+    console.log(selectedColor);
   };
 
   const formik = useFormik({
@@ -70,37 +79,103 @@ const Login = props => {
   return (
     <section className="login">
       <img src={logo} alt="logo" className="login__logo" />
-      <div className="login__rectangle" />
+      <div
+        className="login__rectangle"
+        style={{ backgroundColor: selectedColor.hex }}
+      />
 
       {allowedParams.includes(params) ? (
-        <div className="login__modal">
+        <div className="login__modal signup">
           <div className="login__text">
-            <h3>LOGIN</h3>
+            <h3>Signup</h3>
             <p>To SS account for {params.replace(":", "")}</p>
           </div>
-          <form className="login__form" onSubmit={formik.handleSubmit}>
-            {formik.errors.email && (
-              <label htmlFor="email">{formik.errors.email}</label>
-            )}
+          <form className="signup__form" onSubmit={formik.handleSubmit}>
             <input
+              style={{ gridArea: "firstname" }}
               type="text"
+              className="signup__form--input"
+              name="firstname"
+              placeholder="firstname"
+              values={formik.values.firstname}
+              onChange={formik.handleChange}
+            />
+            <input
+              style={{ gridArea: "lastname" }}
+              className="signup__form--input"
+              type="text"
+              name="lastname"
+              placeholder="lastname"
+              values={formik.values.lastname}
+              onChange={formik.handleChange}
+            />
+            <input
+              style={{ gridArea: "email" }}
+              type="text"
+              className="signup__form--input"
               name="email"
               placeholder="email"
               values={formik.values.email}
               onChange={formik.handleChange}
             />
-            {formik.errors.password && (
-              <label htmlFor="password">{formik.errors.password}</label>
-            )}
             <input
+              style={{ gridArea: "pass" }}
               type="password"
+              className="signup__form--input"
               name="password"
               placeholder="password"
               values={formik.values.password}
               onChange={formik.handleChange}
             />
-            <Link to={`/signup/${params}`}>Dont have an account?</Link>
-            <button type="submit">
+            <div
+              className="signup__form--color signup__form--input"
+              style={{ borderRadius: "1.1rem 1.1rem 0 0 " }}>
+              <CirclePicker
+                width="300px"
+                onChange={colorChangeHandler}
+                colors={[
+                  "#FF5252",
+                  "#4a92ff",
+                  "#5df089",
+                  "#ffd454",
+                  "#c842f5",
+                  "#fa46c7",
+                ]}
+                circleSize={25}
+              />
+            </div>
+            <button
+              className="signup__imgWrapper"
+              style={{ gridArea: "image" }}
+              type="button">
+              {!image && <i className="bx bx-image-add"></i>}
+              {image && (
+                <img
+                  src={URL.createObjectURL(image)}
+                  alt="userProfile"
+                  height="150px"
+                  width="150px"
+                  className="previewImg"
+                />
+              )}
+              <input
+                type="file"
+                name="image"
+                style={{ borderRadius: "2rem" }}
+                accept="image/*"
+                onChange={event => {
+                  setImage(event.currentTarget.files[0]);
+                }}
+                className="signup__img"
+              />
+            </button>
+            <a href="https://system.ssdevelopers.xyz/signup">
+              Dont have an account?
+            </a>
+            <button
+              className="signup__form--button"
+              type="submit"
+              style={{ backgroundColor: selectedColor.hex }}>
               <i className="bx bxs-chevrons-right"></i>
             </button>
           </form>
@@ -138,4 +213,4 @@ const Login = props => {
   );
 };
 
-export default Login;
+export default Signup;

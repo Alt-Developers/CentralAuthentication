@@ -29,7 +29,6 @@ const Login = props => {
     initialValues: { email: "", password: "" },
     validate,
     onSubmit: values => {
-      console.log(values, `To ${params}`);
       const enteredEmail = values.email;
       const enteredPass = values.password;
 
@@ -53,7 +52,7 @@ const Login = props => {
           localStorage.setItem("token", data.token);
           switch (params) {
             case "timetables":
-              window.location.href = `http://localhost:3001/token/:${localStorage.getItem(
+              window.location.href = `https://timetables.ssdevelopers.xyz/token/:${localStorage.getItem(
                 "token"
               )}`;
               break;

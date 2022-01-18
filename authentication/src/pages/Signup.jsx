@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import logo from "../assets/img/ssLogo.png";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CirclePicker } from "react-color";
 import { useState } from "react";
@@ -8,8 +8,13 @@ import { useState } from "react";
 const Signup = props => {
   const { service: params } = useParams();
   const allowedParams = ["timetables", "system13"];
-  const [selectedColor, setSelectedColor] = useState("#FF5252");
+  const [selectedColor, setSelectedColor] = useState({ hex: "#ff5252" });
   const [image, setImage] = useState(null);
+  const navigate = useNavigate();
+
+  const colorChangeHandler = color => {
+    setSelectedColor(color);
+  };
 
   const validate = values => {
     const errors = {};
@@ -23,56 +28,47 @@ const Signup = props => {
     }
 
     if (!values.password) {
-      errors.password = "Required";
+      errors.password = "Password Required";
+    }
+
+    if (!values.firstname) {
+      errors.firstname = "Firstname is required";
+    } else if (values.firstname.length < 3 && values.firstname.length > 30) {
+      errors.firstname = "Invalid firstname length";
+    }
+
+    if (!values.lastname) {
+      errors.lastname = "Lastname is required";
+    } else if (values.lastname.length < 3 && values.lastname.length > 30) {
+      errors.lastname = "Invalid lastname length";
     }
 
     return errors;
-  };
-
-  const colorChangeHandler = color => {
-    setSelectedColor(color);
-    console.log(selectedColor);
   };
 
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validate,
     onSubmit: values => {
-      console.log(values, `To ${params}`);
-      const enteredEmail = values.email;
-      const enteredPass = values.password;
+      let formData = new FormData();
 
-      fetch("https://apis.ssdevelopers.xyz/auth/login", {
+      formData.append("email", values.email);
+      formData.append("pass", values.password);
+      formData.append("firstName", values.firstname);
+      formData.append("lastName", values.lastname);
+      formData.append("primaryColor", selectedColor.hex);
+
+      if (image) formData.append("image", image);
+
+      fetch("https://apis.ssdevelopers.xyz/auth/signup", {
         method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          email: enteredEmail,
-          pass: enteredPass,
-        }),
-      })
-        .then(data => {
-          if (data.status === 200) return data.json();
-          if (data.status === 422) console.log("422"); // Invalid Email;
-          if (data.status === 401) console.log("401"); // Not Authorized
-          if (data.status === 403) console.log("403"); // Forbidden
-        })
-        .then(data => {
-          localStorage.setItem("token", data.token);
-          switch (params) {
-            case "timetables":
-              window.location.href = `http://localhost:3001/token/:${localStorage.getItem(
-                "token"
-              )}`;
-              break;
-            case "system13":
-              console.log("SYSTEM13");
-              break;
-            default:
-              console.log("Something went wrong.");
-          }
-        });
+        body: formData,
+      }).then(data => {
+        if (data.status === 200 || data.status === 201)
+          navigate(`/login/${params}`);
+        if (data.status === 422 || data.status === 400); // Invalid Email / Invalid Password / Needed Color / Have no firstName of lastName
+        if (data.status === 409); // Email already existed.
+      });
     },
   });
 
@@ -169,9 +165,7 @@ const Signup = props => {
                 className="signup__img"
               />
             </button>
-            <a href="https://system.ssdevelopers.xyz/signup">
-              Dont have an account?
-            </a>
+            <Link to={`/login/${params}`}>Already have an account?</Link>
             <button
               className="signup__form--button"
               type="submit"

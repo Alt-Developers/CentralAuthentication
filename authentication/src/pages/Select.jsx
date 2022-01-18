@@ -85,7 +85,7 @@ export default Service;
 //           localStorage.setItem("token", data.token);
 //           switch (params) {
 //             case ":timetables":
-//               window.location.href = `http://localhost:3001/token/:${localStorage.getItem(
+//               window.location.href = `https://localhost:3001/token/:${localStorage.getItem(
 //                 "token"
 //               )}`;
 //               break;

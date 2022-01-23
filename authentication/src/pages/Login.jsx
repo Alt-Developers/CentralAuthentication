@@ -52,7 +52,7 @@ const Login = props => {
           localStorage.setItem("token", data.token);
           switch (params) {
             case "timetables":
-              window.location.href = `https://timetables.ssdevelopers.xyz/token/:${localStorage.getItem(
+              window.location.href = `http://localhost:3001/token/:${localStorage.getItem(
                 "token"
               )}`;
               break;

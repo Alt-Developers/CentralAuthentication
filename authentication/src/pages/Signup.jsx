@@ -4,11 +4,12 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CirclePicker } from "react-color";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const Signup = props => {
   const { service: params } = useParams();
   const allowedParams = ["timetables", "system13"];
-  const [selectedColor, setSelectedColor] = useState({ hex: "#ff5252" });
+  const [selectedColor, setSelectedColor] = useState({ hex: "#707070" });
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
 
@@ -81,7 +82,10 @@ const Signup = props => {
       />
 
       {allowedParams.includes(params) ? (
-        <div className="login__modal signup">
+        <motion.div
+          className="login__modal signup"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}>
           <div className="login__text">
             <h3>Signup</h3>
             <p>To SS account for {params.replace(":", "")}</p>
@@ -167,16 +171,22 @@ const Signup = props => {
             </button>
             <Link to={`/login/${params}`}>Already have an account?</Link>
             <button
-              className="signup__form--button"
+              className={`signup__form--button ${
+                selectedColor.hex === "#707070" ? "disableHover" : ""
+              }`}
               type="submit"
-              style={{ backgroundColor: selectedColor.hex }}>
+              style={{ backgroundColor: selectedColor.hex }}
+              disabled={selectedColor.hex === "#707070"}>
               <i className="bx bxs-chevrons-right"></i>
             </button>
           </form>
-        </div>
+        </motion.div>
       ) : (
         <>
-          <div className="login__modal">
+          <motion.div
+            className="login__modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}>
             <div className="login__text">
               <h3>Right Service?</h3>
               <p>
@@ -187,7 +197,7 @@ const Signup = props => {
             <Link to="/login/timetables" className="btn">
               To Timetables login page<i className="bx bxs-chevrons-right"></i>
             </Link>
-          </div>
+          </motion.div>
           <div className="login__footer">
             <p>
               All rights reserved &copy; 2022 <br />

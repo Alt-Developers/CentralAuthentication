@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import logo from "../assets/img/ssLogo.png";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Login = props => {
   const { service: params } = useParams();
@@ -52,7 +53,7 @@ const Login = props => {
           localStorage.setItem("token", data.token);
           switch (params) {
             case "timetables":
-              window.location.href = `http://localhost:3001/token/:${localStorage.getItem(
+              window.location.href = `https://timetables.ssdevelopers.xyz/token/:${localStorage.getItem(
                 "token"
               )}`;
               break;
@@ -72,7 +73,10 @@ const Login = props => {
       <div className="login__rectangle" />
 
       {allowedParams.includes(params) ? (
-        <div className="login__modal">
+        <motion.div
+          className="login__modal"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}>
           <div className="login__text">
             <h3>LOGIN</h3>
             <p>To SS account for {params.replace(":", "")}</p>
@@ -103,10 +107,13 @@ const Login = props => {
               <i className="bx bxs-chevrons-right"></i>
             </button>
           </form>
-        </div>
+        </motion.div>
       ) : (
         <>
-          <div className="login__modal">
+          <motion.div
+            className="login__modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}>
             <div className="login__text">
               <h3>Right Service?</h3>
               <p>
@@ -117,7 +124,7 @@ const Login = props => {
             <Link to="/login/timetables" className="btn">
               To Timetables login page<i className="bx bxs-chevrons-right"></i>
             </Link>
-          </div>
+          </motion.div>
           <div className="login__footer">
             <p>
               All rights reserved &copy; 2022 <br />

@@ -51,6 +51,10 @@ p {
   color: white;
 }
 
+.disableHover {
+  pointer-events: none;
+}
+
 .btn {
   position: absolute;
   bottom: 2rem;

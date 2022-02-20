@@ -12,11 +12,16 @@
 
 // @import "components/..."
 @import "components/button";
+@import "components/coloredButton";
 
 @import "layout/header";
 @import "layout/navigation";
 @import "layout/footer";
 
+@import "lib/simpleModal.scss";
+@import "lib/loading.scss";
+
 @import "pages/index";
 @import "pages/login";
 @import "pages/signup";
+@import "pages/dashboard";

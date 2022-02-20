@@ -70,8 +70,8 @@
             transition: all .1s cubic-bezier(0.61, 1, 0.88, 1);
 
             &:focus {
-                box-shadow: 0px 0px 20px var(--font-color);
-                border: var(--font-color) 3px solid;
+                box-shadow: 0px 0px 20px #fff;
+                border: #fff 3px solid;
             }
         }
 

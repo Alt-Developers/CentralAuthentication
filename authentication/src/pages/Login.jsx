@@ -43,11 +43,13 @@ const Login = props => {
           pass: enteredPass,
         }),
       })
-        .then(data => {
-          if (data.status === 200) return data.json();
-          if (data.status === 422) console.log("422"); // Invalid Email;
-          if (data.status === 401) console.log("401"); // Not Authorized
-          if (data.status === 403) console.log("403"); // Forbidden
+        .then(async data => {
+          const res = await data.json();
+          if (data.status === 200) {
+            return res;
+          } else {
+            props.liftAuthError(res.header, res.message);
+          }
         })
         .then(data => {
           localStorage.setItem("token", data.token);
@@ -70,7 +72,12 @@ const Login = props => {
   return (
     <section className="login">
       <img src={logo} alt="logo" className="login__logo" />
-      <div className="login__rectangle" />
+      <motion.div
+        className="login__rectangle"
+        initial={{ rotate: "60deg" }}
+        animate={{ rotate: "45deg" }}
+        transition={{ type: "ease" }}
+      />
 
       {allowedParams.includes(params) ? (
         <motion.div

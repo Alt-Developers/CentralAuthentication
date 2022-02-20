@@ -4,10 +4,11 @@
   :root {
     --background-color: #EEEEEE;
     --font-color: #000;
-    --gray-light-1: #E6E6E6;
+    --gray-light-1: #e9e6e6;
     --gray-light-2: #E3E3E3;
-    --gray-light-3: #D8D8D8;
+    --gray-light-3: #DFDFDF;
     --gray-dark-1: #C4C4C4;
+    --modal-background: #e0e0e0;
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -16,8 +17,9 @@
     --font-color: #fff;
     --gray-light-1: #505050;
     --gray-light-2: #404040;
-    --gray-light-3: #454545;
+    --gray-light-3: #494949;
     --gray-dark-1: #353535;
+    --modal-background: #3b3b3b;
   }
 }
 * {
@@ -81,6 +83,207 @@ p {
 }
 .btn:active {
   transform: scale(0.85);
+}
+
+.coloredButton {
+  border: none;
+  border-radius: 1.1rem;
+  width: 25rem;
+  color: #fff;
+  transition: all 0.2s;
+  display: grid;
+  align-items: center;
+  height: 7rem;
+  position: absolute;
+  right: 3rem;
+}
+.coloredButton i {
+  font-size: 3rem;
+  line-height: 2rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .coloredButton i {
+    padding-left: 0.5rem;
+    font-weight: 600;
+    margin-left: auto;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .coloredButton {
+    width: 100%;
+    font-size: 2rem;
+    font-weight: 600;
+    height: 7rem;
+    display: flex;
+    justify-self: center;
+    padding-left: 2rem;
+  }
+  .coloredButton:active {
+    transform: scale(1.05);
+    background-color: #FF5252;
+    box-shadow: 0px 0px 20px #FF5252;
+    color: #fff;
+  }
+}
+.coloredButton:active {
+  transform: scale(0.85);
+  background-color: var(--gray-light-2);
+  box-shadow: 0px 0px 20px var(--gray-light-2);
+}
+
+.simpleModal {
+  background-color: var(--gray-light-2);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -30rem;
+  margin-left: -40rem;
+  width: 80rem;
+  height: fit-content;
+  border-radius: 1.1rem;
+  padding: 2rem;
+  filter: drop-shadow(0px 4px 22px rgba(0, 0, 0, 0.25));
+}
+@media only screen and (max-width: 37.5em) {
+  .simpleModal {
+    left: 2.5vw;
+    margin: 0;
+    top: auto;
+    bottom: 1rem !important;
+    width: 95vw;
+    height: fit-content;
+  }
+}
+.simpleModal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100vw;
+  overflow: hidden;
+}
+.simpleModal__wrapper {
+  height: 100%;
+  width: 100%;
+}
+.simpleModal__header {
+  display: inline;
+  font-size: 3.5rem;
+  padding: 1rem;
+  color: var(--font-color);
+}
+@media only screen and (max-width: 37.5em) {
+  .simpleModal__header {
+    padding: 0rem;
+  }
+}
+.simpleModal__close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  border: none;
+  font-size: 2rem;
+  color: #fff;
+  background-color: #FF5252;
+  border-radius: 1.1rem;
+  padding: 1rem;
+  transition: all 0.2s;
+  display: grid;
+  place-items: center;
+  height: 5rem;
+  width: 5rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .simpleModal__close {
+    top: auto;
+    bottom: 2rem;
+    right: 2rem;
+    width: 90%;
+  }
+}
+.simpleModal__close:hover {
+  box-shadow: 0px 0px 20px #FF5252;
+  scale: 1.05;
+}
+.simpleModal__close:active {
+  scale: 0.9;
+}
+.simpleModal__content {
+  height: fit-content;
+  margin-top: 2rem;
+  color: var(--font-color);
+  background-color: var(--modal-background);
+  border-radius: 1.1rem;
+  padding: 2rem;
+  font-size: 1.7rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .simpleModal__content {
+    height: 30rem;
+    margin-bottom: 6rem;
+    overflow-y: scroll;
+  }
+}
+.simpleModal__content img {
+  object-fit: cover;
+  border-radius: 2rem;
+  width: 100%;
+  height: 200px;
+  margin-bottom: 2rem;
+}
+.simpleModal__changePfp {
+  display: flex;
+  padding-top: 1rem;
+  height: fit-content;
+}
+.simpleModal__changePfp button {
+  background-color: var(--gray-light-2);
+  border-radius: 2rem;
+  border: 2px solid var(--gray-dark-1);
+  height: 20rem;
+  width: 20rem;
+  position: relative;
+}
+.simpleModal__changePfp input {
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+}
+.simpleModal__rarr {
+  font-size: 5rem;
+  align-self: center;
+  padding: 0 2rem 0 2rem;
+}
+.simpleModal__imga {
+  position: absolute;
+}
+.simpleModal__profile {
+  width: 20rem !important;
+  display: inline-block;
+  padding-bottom: none !important;
+}
+
+.redirect {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100%;
+}
+.redirect div {
+  display: flex;
+  align-items: center;
+}
+@media only screen and (max-width: 37.5em) {
+  .redirect div {
+    flex-direction: column;
+  }
+}
+.redirect h3 {
+  color: var(--font-color);
+  font-size: 3rem;
+  font-weight: 500;
+  margin-left: 2rem;
+  text-align: center;
 }
 
 .login {
@@ -150,8 +353,8 @@ p {
   transition: all 0.1s cubic-bezier(0.61, 1, 0.88, 1);
 }
 .login__form input:focus {
-  box-shadow: 0px 0px 20px var(--font-color);
-  border: var(--font-color) 3px solid;
+  box-shadow: 0px 0px 20px #fff;
+  border: #fff 3px solid;
 }
 .login__form label {
   transition: all 0.2s;
@@ -267,8 +470,8 @@ p {
   height: 6rem;
 }
 .signup__form--input:focus {
-  box-shadow: 0px 0px 20px var(--gray-light-3);
-  border: var(--gray-light-3) 3px solid;
+  box-shadow: 0px 0px 20px #fff;
+  border: #fff 3px solid;
 }
 .signup__form--color {
   grid-area: "color";
@@ -310,6 +513,187 @@ p {
 }
 .signup__form--button:active {
   transform: scale(0.85);
+}
+
+.timetableNav {
+  width: 100%;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 2.5rem 0 2.5rem;
+  text-align: center;
+  transition: all 0.2s;
+}
+.timetableNav__home {
+  color: var(--font-color);
+  font-size: 3rem;
+  margin-right: auto;
+}
+.timetableNav h3 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #fff;
+}
+.timetableNav img {
+  justify-self: flex-start;
+  border-radius: 50%;
+  display: inline-block;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .timetableNav img {
+    margin-right: 0;
+  }
+}
+.timetableNav__pref {
+  color: #fff;
+  font-size: 3rem;
+  padding-right: 1rem;
+  margin-top: 0.5rem;
+}
+
+.dashboard {
+  z-index: 1000;
+  position: fixed;
+  width: 100vw;
+}
+.dashboard h1 {
+  color: var(--font-color);
+  font-size: 3rem;
+}
+.dashboard__main {
+  padding: 3rem;
+}
+.dashboard__profile {
+  width: 25rem;
+  height: 25rem;
+  border-radius: 3rem;
+  object-fit: cover;
+  margin: 0.5rem;
+}
+.dashboard__email {
+  margin-left: 1rem;
+  background-color: var(--gray-light-3);
+  border-radius: 1.1rem;
+  padding: 1.5rem;
+  height: 7rem;
+  display: flex;
+  width: 99%;
+}
+.dashboard__email h3 {
+  color: var(--font-color);
+  font-size: 2rem;
+  align-self: center;
+  padding-left: 1rem;
+}
+.dashboard__color {
+  margin-left: 1rem;
+  margin-top: 2rem;
+  display: flex;
+  width: 100%;
+  height: 6rem;
+}
+.dashboard__picker {
+  margin-top: 1.5rem;
+}
+.dashboard__right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  height: fit-content;
+}
+.dashboard__name {
+  display: flex;
+  margin-top: 1rem;
+}
+.dashboard__name h1 {
+  font-size: 4rem !important;
+  padding-left: 1rem;
+  width: 100%;
+}
+.dashboard__name button {
+  height: 5rem;
+  width: 5rem;
+  justify-self: right;
+  grid-area: edit;
+  background: transparent;
+  border: none;
+  border-radius: 1.1rem;
+  transition: all 0.2s;
+  margin-left: auto;
+}
+.dashboard__name i {
+  font-size: 4rem;
+  color: var(--font-color);
+}
+.dashboard__name input {
+  background-color: var(--gray-light-3);
+  border-radius: 1.1rem;
+  padding: 1.5rem;
+  height: 7rem;
+  display: flex;
+  width: 40%;
+  border: none;
+  margin-left: 1rem;
+  color: var(--font-color);
+  transition: all 0.1s cubic-bezier(0.61, 1, 0.88, 1);
+  font-size: 2rem;
+  font-weight: 600;
+}
+.dashboard__name input:focus {
+  box-shadow: 0px 0px 20px #fff;
+  border: #fff 3px solid;
+}
+
+.bar {
+  width: 100%;
+  background-color: var(--gray-light-1);
+  height: fit-content;
+  border-radius: 1.1rem;
+  display: flex;
+  padding: 3rem;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  border: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  filter: drop-shadow(0px 4px 22px rgba(0, 0, 0, 0.25));
+}
+@media only screen and (max-width: 37.5em) {
+  .bar {
+    height: fit-content;
+    flex-direction: column;
+    padding: 0;
+    background-color: transparent;
+    filter: none;
+    height: 40rem;
+    margin-bottom: 2rem;
+  }
+}
+.bar__header {
+  margin-bottom: 1.5rem;
+  font-size: 3rem;
+  margin-left: 2rem;
+  color: var(--font-color);
+}
+@media only screen and (max-width: 37.5em) {
+  .bar__header {
+    margin-left: 1rem;
+  }
+}
+.bar__icon {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .bar__icon {
+    width: 70px;
+    height: 70px;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

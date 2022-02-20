@@ -1,0 +1,30 @@
+.then(data => {
+          localStorage.setItem("token", data.token);
+          switch (params) {
+            case "timetables":
+              window.location.href = `https://timetables.ssdevelopers.xyz/token/:${localStorage.getItem(
+                "token"
+              )}`;
+              break;
+            case "system13":
+              console.log("SYSTEM13");
+              break;
+            default:
+              console.log("Something went wrong.");
+          }
+        });
+
+.then(data => {
+        const res = data.json();
+        if (data.status === 200) return res;
+        if (data.status === 422) {
+          props.liftAuthError(res.header, res.message);
+          console.log(res.header);
+          // Invalid Email;
+        }
+        if (data.status === 401) {
+          props.liftAuthError(res.header, res.message);
+          console.log(res.header);
+        } // Not Authorized
+        if (data.status === 403) props.liftAuthError(res.header, res.message); // Forbidden
+      });

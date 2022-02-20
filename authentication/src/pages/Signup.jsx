@@ -64,11 +64,11 @@ const Signup = props => {
       fetch("https://apis.ssdevelopers.xyz/auth/signup", {
         method: "POST",
         body: formData,
-      }).then(data => {
-        if (data.status === 200 || data.status === 201)
-          navigate(`/login/${params}`);
-        if (data.status === 422 || data.status === 400); // Invalid Email / Invalid Password / Needed Color / Have no firstName of lastName
-        if (data.status === 409); // Email already existed.
+      }).then(async data => {
+        const res = await data.json();
+        if (data.status !== 200) {
+          props.liftAuthError(res.header, res.message);
+        }
       });
     },
   });

@@ -573,6 +573,27 @@ p {
   object-fit: cover;
   margin: 0.5rem;
 }
+.dashboard__profileButton {
+  background: transparent;
+  border: none;
+  position: relative;
+  transition: all 0.2s;
+}
+.dashboard__profileButton img {
+  filter: brightness(0.7);
+}
+.dashboard__profileButton i {
+  color: #fff;
+  font-size: 4rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s;
+}
+.dashboard__profileButton:hover > i {
+  font-size: 6rem;
+}
 .dashboard__email {
   margin-left: 1rem;
   background-color: var(--gray-light-3);
@@ -658,6 +679,7 @@ p {
   gap: 2rem;
   margin-bottom: 4rem;
   border: none;
+  transition: all 0.2s;
   -ms-overflow-style: none;
   scrollbar-width: none;
   filter: drop-shadow(0px 4px 22px rgba(0, 0, 0, 0.25));
@@ -694,6 +716,21 @@ p {
     width: 70px;
     height: 70px;
   }
+}
+
+.dashAuth input {
+  background-color: var(--gray-light-3);
+  border-radius: 1.1rem;
+  padding: 1.5rem;
+  height: 7rem;
+  display: flex;
+  width: 40%;
+  border: none;
+  margin-left: 1rem;
+  color: var(--font-color);
+  transition: all 0.1s cubic-bezier(0.61, 1, 0.88, 1);
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=main.css.map */

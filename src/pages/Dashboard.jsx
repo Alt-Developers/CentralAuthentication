@@ -28,24 +28,36 @@ const Dashboard = props => {
   const liftSubmit = event => {
     event.preventDefault();
     console.log(localStorage.getItem("token"));
-    fetch("https://apis.ssdevelopers.xyz/auth/updateUserInfo", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        firstName: firstName,
-        lastName: lastName,
-        color: selectedColor,
-      }),
-    })
-      .then(data => data.json())
-      .then(data => {
-        console.log(data.header, data.message);
-        isEditingName(false);
-        if (data.modal) props.liftAuthError(data.header, data.message);
-      });
+
+    if (
+      firstName.length >= 2 &&
+      firstName.length <= 20 &&
+      lastName.length >= 2 &&
+      lastName.length <= 20
+    ) {
+      fetch("https://apis.ssdevelopers.xyz/auth/updateUserInfo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+          color: selectedColor,
+        }),
+      })
+        .then(data => data.json())
+        .then(data => {
+          console.log(data.header, data.message);
+          if (data.modal) props.liftAuthError(data.header, data.message);
+        });
+    } else {
+      props.liftAuthError(
+        "Invalid Name Lengths",
+        "First names and last names must be between 2-20 characters"
+      );
+    }
   };
 
   useEffect(() => {
@@ -90,24 +102,34 @@ const Dashboard = props => {
         <main className="dashboard__main">
           <h1 className="bar__header">Dashboard</h1>
           <div className={`bar`}>
-            <button
-              style={{ background: "transparent", border: "none" }}
-              onClick={() => {
-                props.liftAuthError(
-                  "Change Your Profile Picture",
-                  "Drag and drop your photo or click the box bellow",
-                  {
-                    type: "CHANGE-PFP",
-                    userProfile: `https://apis.ssdevelopers.xyz/${userInfo.img}`,
-                  }
-                );
-              }}>
+            {isEditingName ? (
+              <button
+                className="dashboard__profileButton"
+                onClick={() => {
+                  props.liftAuthError(
+                    "Change Your Profile Picture",
+                    "Drag and drop your photo or click the box bellow",
+                    {
+                      type: "CHANGE-PFP",
+                      userProfile: `https://apis.ssdevelopers.xyz/${userInfo.img}`,
+                    }
+                  );
+                }}>
+                <img
+                  src={`https://apis.ssdevelopers.xyz/${userInfo.img}`}
+                  alt="hello"
+                  className="dashboard__profile"
+                />
+                <i className="bx bx-image-add"></i>
+              </button>
+            ) : (
               <img
                 src={`https://apis.ssdevelopers.xyz/${userInfo.img}`}
                 alt="hello"
                 className="dashboard__profile"
               />
-            </button>
+            )}
+
             <form className="dashboard__right" onSubmit={liftSubmit}>
               <div className="dashboard__name">
                 {isEditingName ? (
@@ -135,7 +157,16 @@ const Dashboard = props => {
                 </button>
               </div>
 
-              <div className="dashboard__email">
+              <div
+                className="dashboard__email"
+                onClick={() => {
+                  if (isEditingName) {
+                    props.liftAuthError(
+                      "Emails Can't be changed",
+                      "Unfortunately if you wanted to change your email you must make a new SS Account.\nThis is for the sake of your own security"
+                    );
+                  }
+                }}>
                 <h3 className="">{userInfo.email}</h3>
               </div>
 
@@ -157,6 +188,12 @@ const Dashboard = props => {
                 <ColoredButton color={selectedColor} type="submit" />
               </div>
             </form>
+          </div>
+
+          <h1 className="bar__header">Authentication</h1>
+          <div className="bar dashAuth">
+            <input type="text" />
+            <input type="text" />
           </div>
         </main>
       </section>

@@ -54,7 +54,7 @@ function App() {
             element={<Signup liftAuthError={liftAuthError} />}
           />
           <Route
-            path="dashRedirect"
+            path="redirect"
             element={<Redirect liftUserInfo={liftUserInfo} />}
           />
           <Route

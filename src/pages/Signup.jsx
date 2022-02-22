@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { CirclePicker } from "react-color";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { modalActions } from "../context/modalSlice";
 
 const Signup = props => {
   const { service: params } = useParams();
@@ -12,6 +14,7 @@ const Signup = props => {
   const [selectedColor, setSelectedColor] = useState({ hex: "#707070" });
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const colorChangeHandler = color => {
     setSelectedColor(color);
@@ -67,7 +70,9 @@ const Signup = props => {
       }).then(async data => {
         const res = await data.json();
         if (data.status !== 200) {
-          props.liftAuthError(res.header, res.message);
+          dispatch(
+            modalActions.openModal({ header: res.header, text: res.message })
+          );
         }
       });
     },

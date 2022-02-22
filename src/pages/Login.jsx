@@ -3,10 +3,13 @@ import logo from "../assets/img/ssLogo.png";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { modalActions } from "../context/modalSlice";
 
 const Login = props => {
   const { service: params } = useParams();
   const allowedParams = ["timetables", "system13"];
+  const dispatch = useDispatch();
 
   const validate = values => {
     const errors = {};
@@ -48,7 +51,9 @@ const Login = props => {
           if (data.status === 200) {
             return res;
           } else {
-            props.liftAuthError(res.header, res.message);
+            dispatch(
+              modalActions.openModal({ header: res.header, text: res.message })
+            );
           }
         })
         .then(data => {

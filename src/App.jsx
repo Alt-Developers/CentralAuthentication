@@ -8,29 +8,17 @@ import SimpleModal from "./components/simpleModal";
 import { useState } from "react";
 import Redirect from "./pages/Redirect";
 import Dashboard from "./pages/Dashboard";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [modalText, setModalText] = useState("");
-  const [modalHeader, setModalHeader] = useState("");
-  const [modalType, setModalType] = useState("");
   const [userInfo, setUserInfo] = useState();
+  const modalState = useSelector(state => state.modal);
+
+  console.log(modalState);
 
   useEffect(() => {
     if (localStorage.getItem("token")) localStorage.removeItem("token");
   }, []);
-
-  const liftCloseModal = () => {
-    setModalIsOpen(false);
-  };
-
-  const liftAuthError = (header, text, type = "NONE") => {
-    console.log(header, text);
-    setModalText(text);
-    setModalHeader(header);
-    setModalType(type);
-    setModalIsOpen(true);
-  };
 
   const liftUserInfo = userInfo => {
     setUserInfo(userInfo);
@@ -39,30 +27,18 @@ function App() {
   return (
     <>
       <SimpleModal
-        isOpen={modalIsOpen}
-        text={modalText}
-        liftCloseModal={liftCloseModal}
-        header={modalHeader}
-        type={modalType}>
+        isOpen={modalState.isOpen}
+        header={modalState.header}
+        text={modalState.text}
+        type={modalState.type}>
         <Routes>
-          <Route
-            path="login/:service"
-            element={<Login liftAuthError={liftAuthError} />}
-          />
-          <Route
-            path="signup/:service"
-            element={<Signup liftAuthError={liftAuthError} />}
-          />
+          <Route path="login/:service" element={<Login />} />
+          <Route path="signup/:service" element={<Signup />} />
           <Route
             path="redirect"
             element={<Redirect liftUserInfo={liftUserInfo} />}
           />
-          <Route
-            path="dashboard"
-            element={
-              <Dashboard userInfo={userInfo} liftAuthError={liftAuthError} />
-            }
-          />
+          <Route path="dashboard" element={<Dashboard userInfo={userInfo} />} />
           <Route path="*" element={<Select />} />
         </Routes>
       </SimpleModal>

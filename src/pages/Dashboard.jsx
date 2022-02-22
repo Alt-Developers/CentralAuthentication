@@ -4,6 +4,10 @@ import { useState } from "react";
 import ColoredButton from "./ColoredButton";
 import { useEffect } from "react";
 import Loading from "../components/Loading";
+import { useDispatch } from "react-redux";
+import { modalActions } from "../context/modalSlice";
+import { useSelector } from "react-redux";
+import { refetchActions } from "../context/refetchSlice";
 
 const Dashboard = props => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,6 +21,8 @@ const Dashboard = props => {
     lastName: "Loading",
     img: "loading",
   });
+  const refetch = useSelector(state => state.refetch.refetchCount);
+  const dispatch = useDispatch();
   let serviceHref;
   let serviceName;
 
@@ -28,6 +34,7 @@ const Dashboard = props => {
   const liftSubmit = event => {
     event.preventDefault();
     console.log(localStorage.getItem("token"));
+    console.log("submitted");
 
     if (
       firstName.length >= 2 &&
@@ -50,12 +57,23 @@ const Dashboard = props => {
         .then(data => data.json())
         .then(data => {
           console.log(data.header, data.message);
-          if (data.modal) props.liftAuthError(data.header, data.message);
+          if (data.modal)
+            dispatch(
+              modalActions.openModal({
+                header: data.header,
+                text: data.message,
+              })
+            );
+          console.log("completed fetch");
+          dispatch(refetchActions.refetch());
+          setIsEditingName(false);
         });
     } else {
-      props.liftAuthError(
-        "Invalid Name Lengths",
-        "First names and last names must be between 2-20 characters"
+      dispatch(
+        modalActions.openModal({
+          header: "Invalid Name Lengths",
+          text: "First names and last names must be between 2-20 characters",
+        })
       );
     }
   };
@@ -80,11 +98,11 @@ const Dashboard = props => {
           }
         });
     }
-  }, []);
+  }, [refetch]);
 
   useEffect(() => {
-    console.log(selectedColor);
-  }, [selectedColor]);
+    console.log("editing name is:" + isEditingName);
+  }, [isEditingName]);
 
   const colorChangeHandler = color => {
     setSelectedColor(color.hex);
@@ -106,18 +124,22 @@ const Dashboard = props => {
               <button
                 className="dashboard__profileButton"
                 onClick={() => {
-                  props.liftAuthError(
-                    "Change Your Profile Picture",
-                    "Drag and drop your photo or click the box bellow",
-                    {
-                      type: "CHANGE-PFP",
-                      userProfile: `https://apis.ssdevelopers.xyz/${userInfo.img}`,
-                    }
+                  dispatch(
+                    modalActions.openModal({
+                      header: "Change Your Profile Picture",
+                      text: "Drag and drop your photo or click the box bellow",
+                      type: {
+                        type: "CHANGE-PFP",
+                        userProfile: `https://apis.ssdevelopers.xyz/${userInfo.img}`,
+                      },
+                    })
                   );
                 }}>
                 <img
                   src={`https://apis.ssdevelopers.xyz/${userInfo.img}`}
                   alt="hello"
+                  height={"25rem"}
+                  width={"25rem"}
                   className="dashboard__profile"
                 />
                 <i className="bx bx-image-add"></i>
@@ -152,9 +174,11 @@ const Dashboard = props => {
                     {userInfo.firstName} {userInfo.lastName}
                   </h1>
                 )}
-                <button onClick={() => setIsEditingName(true)}>
-                  <i className="bx bx-edit" />
-                </button>
+                {!isEditingName && (
+                  <button onClick={() => setIsEditingName(true)} type="button">
+                    <i className="bx bx-edit" />
+                  </button>
+                )}
               </div>
 
               <div
@@ -190,11 +214,11 @@ const Dashboard = props => {
             </form>
           </div>
 
-          <h1 className="bar__header">Authentication</h1>
+          {/* <h1 className="bar__header">Authentication</h1>
           <div className="bar dashAuth">
             <input type="text" />
             <input type="text" />
-          </div>
+          </div> */}
         </main>
       </section>
     );

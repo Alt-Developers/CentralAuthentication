@@ -10,6 +10,11 @@
     position: absolute;
     right: 3rem;
 
+    @include respond(phone) {
+        position: static;
+        height: 5rem;
+    }
+
     // filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.10));
 
     i {

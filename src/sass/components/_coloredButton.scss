@@ -9,6 +9,7 @@
     height: 7rem;
     position: absolute;
     right: 3rem;
+    bottom: 3rem;
 
     @include respond(phone) {
         position: static;

@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { modalActions } from "../context/modalSlice";
 import { useSelector } from "react-redux";
 import { refetchActions } from "../context/refetchSlice";
+import { useMediaQuery } from "react-responsive";
 
 const Dashboard = props => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,6 +24,7 @@ const Dashboard = props => {
   });
   const refetch = useSelector(state => state.refetch.refetchCount);
   const dispatch = useDispatch();
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   let serviceHref;
   let serviceName;
 
@@ -123,6 +125,7 @@ const Dashboard = props => {
             {isEditingName ? (
               <button
                 className="dashboard__profileButton"
+                style={{ width: "fit-content" }}
                 onClick={() => {
                   dispatch(
                     modalActions.openModal({
@@ -196,7 +199,7 @@ const Dashboard = props => {
 
               <div className="dashboard__color">
                 <CirclePicker
-                  width="400px"
+                  width="100%"
                   className="dashboard__picker"
                   onChange={colorChangeHandler}
                   colors={[
@@ -207,18 +210,40 @@ const Dashboard = props => {
                     "#c842f5",
                     "#fa46c7",
                   ]}
-                  circleSize={40}
+                  circleSize={isTabletOrMobile ? 26 : 40}
                 />
-                <ColoredButton color={selectedColor} type="submit" />
               </div>
+              <ColoredButton color={selectedColor} type="submit" />
             </form>
           </div>
 
-          {/* <h1 className="bar__header">Authentication</h1>
+          <h1 className="bar__header">Authentication</h1>
           <div className="bar dashAuth">
-            <input type="text" />
-            <input type="text" />
-          </div> */}
+            <input
+              type="text"
+              type="password"
+              placeholder="Old password"
+              className="dashAuth__input dashAuth__long"
+            />
+            <div style={{ display: "flex", gap: "1rem" }}>
+              <input
+                type="text"
+                type="password"
+                placeholder="New Password"
+                className="dashAuth__input"
+              />
+              <input
+                type="text"
+                type="password"
+                placeholder={
+                  isTabletOrMobile ? "Confirm Password" : "Confirm New Password"
+                }
+                className="dashAuth__input"
+              />
+            </div>
+
+            <ColoredButton color={selectedColor} type="submit" />
+          </div>
         </main>
       </section>
     );

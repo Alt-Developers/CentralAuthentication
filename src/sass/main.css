@@ -96,6 +96,7 @@ p {
   height: 7rem;
   position: absolute;
   right: 3rem;
+  bottom: 3rem;
 }
 @media only screen and (max-width: 37.5em) {
   .coloredButton {
@@ -639,8 +640,10 @@ p {
 
 .dashboard {
   z-index: 1000;
-  position: fixed;
-  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 .dashboard h1 {
   color: var(--font-color);
@@ -654,11 +657,11 @@ p {
   height: 25rem;
   border-radius: 3rem;
   object-fit: cover;
-  margin: 0.5rem;
+  margin: 1rem;
 }
 @media only screen and (max-width: 37.5em) {
   .dashboard__profile {
-    margin: 1rem;
+    margin: 0;
   }
 }
 .dashboard__profileButton {
@@ -727,6 +730,11 @@ p {
 @media only screen and (max-width: 37.5em) {
   .dashboard__picker {
     margin-top: 0rem;
+    background-color: var(--gray-light-3);
+    width: 100%;
+    padding: 2rem;
+    height: 6rem;
+    border-radius: 1.1rem;
   }
 }
 .dashboard__right {
@@ -739,7 +747,6 @@ p {
 @media only screen and (max-width: 37.5em) {
   .dashboard__right {
     width: 100%;
-    padding: 1rem;
   }
 }
 .dashboard__name {
@@ -819,7 +826,7 @@ p {
   .bar {
     height: fit-content;
     flex-direction: column;
-    padding: 1.5rem;
+    padding: 2.5rem;
     margin-bottom: 2rem;
     gap: 1rem;
   }
@@ -847,19 +854,45 @@ p {
   }
 }
 
-.dashAuth input {
+.dashAuth {
+  padding: 3rem;
+  height: 23rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .dashAuth {
+    height: fit-content;
+    padding: 2.5rem;
+  }
+}
+.dashAuth__input {
   background-color: var(--gray-light-3);
   border-radius: 1.1rem;
   padding: 1.5rem;
   height: 7rem;
   display: flex;
-  width: 40%;
+  width: 30%;
   border: none;
-  margin-left: 1rem;
   color: var(--font-color);
   transition: all 0.1s cubic-bezier(0.61, 1, 0.88, 1);
   font-size: 2rem;
   font-weight: 600;
+}
+@media only screen and (max-width: 37.5em) {
+  .dashAuth__input {
+    width: 100%;
+    display: inline-block;
+  }
+}
+.dashAuth__long {
+  width: 100%;
+}
+@media only screen and (max-width: 37.5em) {
+  .dashAuth__long {
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

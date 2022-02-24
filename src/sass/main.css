@@ -109,13 +109,6 @@ p {
   line-height: 2rem;
 }
 @media only screen and (max-width: 37.5em) {
-  .coloredButton i {
-    padding-left: 0.5rem;
-    font-weight: 600;
-    margin-left: auto;
-  }
-}
-@media only screen and (max-width: 37.5em) {
   .coloredButton {
     width: 100%;
     font-size: 2rem;
@@ -242,6 +235,12 @@ p {
   display: flex;
   padding-top: 1rem;
   height: fit-content;
+  width: 70rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .simpleModal__changePfp {
+    width: fit-content;
+  }
 }
 .simpleModal__changePfp input {
   height: 100%;
@@ -256,6 +255,11 @@ p {
   align-self: center;
   padding: 0 2rem 0 2rem;
 }
+@media only screen and (max-width: 37.5em) {
+  .simpleModal__rarr {
+    display: none;
+  }
+}
 .simpleModal__imga {
   position: absolute;
   top: 50%;
@@ -268,6 +272,11 @@ p {
   width: 20rem !important;
   display: inline-block;
   padding-bottom: none !important;
+}
+@media only screen and (max-width: 37.5em) {
+  .simpleModal__profile {
+    display: none;
+  }
 }
 .simpleModal__submit {
   background-color: #FF5252;
@@ -290,18 +299,11 @@ p {
   .simpleModal__submit i {
     padding-left: 0.5rem;
     font-weight: 600;
-    margin-left: auto;
   }
 }
 @media only screen and (max-width: 37.5em) {
   .simpleModal__submit {
-    width: 100%;
-    font-size: 2rem;
-    font-weight: 600;
-    height: 7rem;
-    display: flex;
-    justify-self: center;
-    padding-left: 2rem;
+    margin-left: 2rem;
   }
   .simpleModal__submit:active {
     transform: scale(1.05);
@@ -326,9 +328,8 @@ p {
   border-radius: 2rem;
   border: 2px solid var(--gray-dark-1);
   height: 20rem;
-  width: 20rem;
+  width: 20rem !important;
   position: relative;
-  width: 20rem;
   transition: all 0.2s;
   display: grid;
   place-items: center;
@@ -342,6 +343,11 @@ p {
 }
 .simpleModal__profileButton:active {
   scale: 0.9;
+}
+@media only screen and (max-width: 37.5em) {
+  .simpleModal__profileButton {
+    width: 20rem;
+  }
 }
 .simpleModal__preview {
   scale: 0.7;
@@ -652,6 +658,11 @@ p {
 .dashboard__main {
   padding: 3rem;
 }
+@media only screen and (max-width: 37.5em) {
+  .dashboard__main {
+    padding: 2rem;
+  }
+}
 .dashboard__profile {
   width: 25rem;
   height: 25rem;
@@ -692,6 +703,7 @@ p {
   background-color: var(--gray-light-3);
   border-radius: 1.1rem;
   padding: 1.5rem;
+  overflow-x: hidden;
   height: 7rem;
   display: flex;
   width: 99%;
@@ -714,7 +726,7 @@ p {
   display: flex;
   width: 100%;
   height: 6rem;
-  gap: 2rem;
+  gap: 3rem;
 }
 @media only screen and (max-width: 37.5em) {
   .dashboard__color {
@@ -725,7 +737,7 @@ p {
   }
 }
 .dashboard__picker {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 @media only screen and (max-width: 37.5em) {
   .dashboard__picker {
@@ -740,7 +752,7 @@ p {
 .dashboard__right {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   width: 80%;
   height: fit-content;
 }
@@ -759,13 +771,15 @@ p {
   }
 }
 .dashboard__name h1 {
-  font-size: 4rem !important;
+  font-size: 4rem;
   padding-left: 1rem;
   width: 100%;
 }
 @media only screen and (max-width: 37.5em) {
   .dashboard__name h1 {
     padding-left: 0;
+    width: 65vw;
+    font-size: 4rem;
   }
 }
 .dashboard__name button {
@@ -856,10 +870,10 @@ p {
 
 .dashAuth {
   padding: 3rem;
-  height: 23rem;
+  height: 22rem;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2rem;
 }
 @media only screen and (max-width: 37.5em) {
   .dashAuth {
@@ -885,6 +899,10 @@ p {
     width: 100%;
     display: inline-block;
   }
+}
+.dashAuth__input:focus {
+  box-shadow: 0px 0px 20px #fff;
+  border: #fff 3px solid;
 }
 .dashAuth__long {
   width: 100%;

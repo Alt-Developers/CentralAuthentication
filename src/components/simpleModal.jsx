@@ -10,6 +10,7 @@ const SimpleModal = props => {
 
   const submitHandler = event => {
     event.preventDefault();
+    console.log("into the fetch!");
 
     const profileChangeFormData = new FormData();
     profileChangeFormData.append("image", image);
@@ -21,12 +22,21 @@ const SimpleModal = props => {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
-      .then(data => data.json())
       .then(data => {
-        if (data.message === "Successfully edited user's profile picture.") {
+        console.log(data.status);
+        if (data.status === 200) {
           dispatch(modalActions.closeModal());
           dispatch(refetchActions.refetch());
           setImage("");
+        }
+        return data.json();
+      })
+      .then(data => {
+        console.log(data);
+        if (data.modal) {
+          dispatch(
+            modalActions.openModal({ header: data.header, text: data.message })
+          );
         }
       });
   };
@@ -80,7 +90,7 @@ const SimpleModal = props => {
                         setImage(event.currentTarget.files[0]);
                       }}
                       type="file"
-                      accept="image/png, image/gif, image/jpeg"></input>
+                      accept="image/png, image/gif, image/jpeg, image/jpg"></input>
                     {image ? (
                       <img
                         src={URL.createObjectURL(image)}

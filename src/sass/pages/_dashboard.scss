@@ -55,6 +55,10 @@
 
     &__main {
         padding: 3rem;
+
+        @include respond(phone) {
+            padding: 2rem;
+        }
     }
 
     &__profile {
@@ -101,6 +105,7 @@
         background-color: var(--gray-light-3);
         border-radius: 1.1rem;
         padding: 1.5rem;
+        overflow-x: hidden;
 
         height: 7rem;
         display: flex;
@@ -125,7 +130,7 @@
         display: flex;
         width: 100%;
         height: 6rem;
-        gap: 2rem;
+        gap: 3rem;
 
         @include respond(phone) {
             flex-direction: column;
@@ -136,14 +141,14 @@
     }
 
     &__picker {
-        margin-top: 1.5rem;
+        margin-top: 1rem;
 
         @include respond(phone) {
             margin-top: 0rem;
             background-color: var(--gray-light-3);
             width: 100%;
             padding: 2rem;
-            height: 6rem;
+            height: clamp(6rem, 6rem, 10rem);
             border-radius: 1.1rem;
         }
     }
@@ -151,7 +156,7 @@
     &__right {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: 1.5rem;
         width: 80%;
         height: fit-content;
         // height: 50%;
@@ -171,12 +176,14 @@
         }
 
         h1 {
-            font-size: 4rem !important;
+            font-size: 4rem;
             padding-left: 1rem;
             width: 100%;
 
             @include respond(phone) {
                 padding-left: 0;
+                width: 65vw;
+                font-size: 4rem;
             }
         }
 
@@ -282,10 +289,10 @@
 
 .dashAuth {
     padding: 3rem;
-    height: 23rem;
+    height: 22rem;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 2rem;
 
     @include respond(phone) {
         height: fit-content;
@@ -308,6 +315,11 @@
         @include respond(phone) {
             width: 100%;
             display: inline-block;
+        }
+
+        &:focus {
+            box-shadow: 0px 0px 20px #fff;
+            border: #fff 3px solid;
         }
     }
 

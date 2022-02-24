@@ -22,9 +22,13 @@ const Dashboard = props => {
     lastName: "Loading",
     img: "loading",
   });
+  const [oldPass, setOldPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
   const refetch = useSelector(state => state.refetch.refetchCount);
   const dispatch = useDispatch();
-  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 56.25em)" });
+  const isPhone = useMediaQuery({ query: "(max-width: 75em)" });
   let serviceHref;
   let serviceName;
 
@@ -33,10 +37,47 @@ const Dashboard = props => {
     serviceName = "Timetables";
   }
 
+  const authSubmitHandler = event => {
+    event.preventDefault();
+
+    fetch("https://apis.ssdevelopers.xyz/auth/changePassword", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        password: oldPass,
+        newPassword: newPass,
+        confirmNewPassword: confirmPass,
+      }),
+    })
+      .then(data => {
+        console.log(data.status);
+        if (data.status === 201) {
+          setOldPass("");
+          setNewPass("");
+          setConfirmPass("");
+        }
+        return data.json();
+      })
+      .then(data => {
+        console.log(data);
+        if (data.modal) {
+          dispatch(
+            modalActions.openModal({
+              header: data.header,
+              text: data.message,
+            })
+          );
+        }
+      });
+  };
+
   const liftSubmit = event => {
     event.preventDefault();
-    console.log(localStorage.getItem("token"));
     console.log("submitted");
+    console.log(selectedColor);
 
     if (
       firstName.length >= 2 &&
@@ -109,6 +150,7 @@ const Dashboard = props => {
   const colorChangeHandler = color => {
     setSelectedColor(color.hex);
   };
+
   if (isLoading) {
     return <Loading />;
   } else {
@@ -173,7 +215,13 @@ const Dashboard = props => {
                       value={lastName}></input>
                   </>
                 ) : (
-                  <h1>
+                  <h1
+                    style={
+                      isPhone &&
+                      userInfo.firstName.length + userInfo.lastName.length >= 20
+                        ? { fontSize: "3rem" }
+                        : { fontSize: "4rem" }
+                    }>
                     {userInfo.firstName} {userInfo.lastName}
                   </h1>
                 )}
@@ -210,27 +258,31 @@ const Dashboard = props => {
                     "#c842f5",
                     "#fa46c7",
                   ]}
-                  circleSize={isTabletOrMobile ? 26 : 40}
+                  circleSize={isTabletOrMobile ? 21 : 40}
                 />
+                <ColoredButton color={selectedColor} type="submit" />
               </div>
-              <ColoredButton color={selectedColor} type="submit" />
             </form>
           </div>
 
           <h1 className="bar__header">Authentication</h1>
-          <div className="bar dashAuth">
+          <form className="bar dashAuth" onSubmit={authSubmitHandler}>
             <input
               type="text"
               type="password"
               placeholder="Old password"
               className="dashAuth__input dashAuth__long"
+              value={oldPass}
+              onChange={event => setOldPass(event.target.value)}
             />
-            <div style={{ display: "flex", gap: "1rem" }}>
+            <div style={{ display: "flex", gap: "2rem" }}>
               <input
                 type="text"
                 type="password"
                 placeholder="New Password"
                 className="dashAuth__input"
+                value={newPass}
+                onChange={event => setNewPass(event.target.value)}
               />
               <input
                 type="text"
@@ -239,11 +291,12 @@ const Dashboard = props => {
                   isTabletOrMobile ? "Confirm Password" : "Confirm New Password"
                 }
                 className="dashAuth__input"
+                value={confirmPass}
+                onChange={event => setConfirmPass(event.target.value)}
               />
             </div>
-
             <ColoredButton color={selectedColor} type="submit" />
-          </div>
+          </form>
         </main>
       </section>
     );

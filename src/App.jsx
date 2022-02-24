@@ -16,9 +16,9 @@ function App() {
 
   console.log(modalState);
 
-  useEffect(() => {
-    if (localStorage.getItem("token")) localStorage.removeItem("token");
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) localStorage.removeItem("token");
+  // }, []);
 
   const liftUserInfo = userInfo => {
     setUserInfo(userInfo);

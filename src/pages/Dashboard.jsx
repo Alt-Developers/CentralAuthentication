@@ -123,7 +123,7 @@ const Dashboard = props => {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      fetch("https://apis.ssdevelopers.xyz/auth/getUserData", {
+      fetch("https://apis.ssdevelopers.xyz/auth/getUser", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -175,13 +175,13 @@ const Dashboard = props => {
                       text: "Drag and drop your photo or click the box bellow",
                       type: {
                         type: "CHANGE-PFP",
-                        userProfile: `https://apis.ssdevelopers.xyz/${userInfo.img}`,
+                        userProfile: `https://apis.ssdevelopers.xyz/${userInfo.profilePicture}`,
                       },
                     })
                   );
                 }}>
                 <img
-                  src={`https://apis.ssdevelopers.xyz/${userInfo.img}`}
+                  src={`https://apis.ssdevelopers.xyz/${userInfo.profilePicture}`}
                   alt="hello"
                   height={"25rem"}
                   width={"25rem"}
@@ -191,7 +191,7 @@ const Dashboard = props => {
               </button>
             ) : (
               <img
-                src={`https://apis.ssdevelopers.xyz/${userInfo.img}`}
+                src={`https://apis.ssdevelopers.xyz/${userInfo.profilePicture}`}
                 alt="hello"
                 className="dashboard__profile"
               />

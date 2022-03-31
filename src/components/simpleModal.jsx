@@ -104,7 +104,7 @@ const SimpleModal = props => {
                     )}
                   </button>
                   <button type="submit" className="simpleModal__submit">
-                    <i class="bx bx-chevrons-right"></i>
+                    <i className="bx bx-chevrons-right"></i>
                   </button>
                 </form>
               )}

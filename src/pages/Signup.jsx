@@ -69,10 +69,12 @@ const Signup = props => {
         body: formData,
       }).then(async data => {
         const res = await data.json();
+        console.log(res, params);
         if (data.status !== 200) {
           dispatch(
             modalActions.openModal({ header: res.header, text: res.message })
           );
+          window.location.href = `https://authentication.ssdevelopers.xyz/login/${params}`;
         }
       });
     },

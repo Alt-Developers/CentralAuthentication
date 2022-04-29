@@ -57,12 +57,20 @@ const Login = props => {
           }
         })
         .then(data => {
+          console.log(data);
           localStorage.setItem("token", data.token);
           switch (params) {
             case "timetables":
-              window.location.href = `https://timetables.ssdevelopers.xyz/token/:${localStorage.getItem(
-                "token"
-              )}`;
+              if (data.isNewUser) {
+                window.location.href = `https://timetables.ssdevelopers.xyz/token?to=setup&token=${localStorage.getItem(
+                  "token"
+                )}`;
+              } else {
+                window.location.href = `https://timetables.ssdevelopers.xyz/token?to=home&token=${localStorage.getItem(
+                  "token"
+                )}`;
+              }
+
               break;
             case "system13":
               console.log("SYSTEM13");

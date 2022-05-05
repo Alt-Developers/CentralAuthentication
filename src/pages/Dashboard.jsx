@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { refetchActions } from "../context/refetchSlice";
 import { useMediaQuery } from "react-responsive";
 
-const Dashboard = props => {
+const Dashboard = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedColor, setSelectedColor] = useState("#fff");
   const [firstName, setFirstName] = useState();
@@ -25,7 +25,7 @@ const Dashboard = props => {
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
-  const refetch = useSelector(state => state.refetch.refetchCount);
+  const refetch = useSelector((state) => state.refetch.refetchCount);
   const dispatch = useDispatch();
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 56.25em)" });
   const isPhone = useMediaQuery({ query: "(max-width: 75em)" });
@@ -37,7 +37,7 @@ const Dashboard = props => {
     serviceName = "Timetables";
   }
 
-  const authSubmitHandler = event => {
+  const authSubmitHandler = (event) => {
     event.preventDefault();
 
     fetch("https://apis.ssdevelopers.xyz/auth/changePassword", {
@@ -52,8 +52,8 @@ const Dashboard = props => {
         confirmNewPassword: confirmPass,
       }),
     })
-      .then(data => {
-        console.log(data.status);
+      .then((data) => {
+        // console.log(data.status);
         if (data.status === 201) {
           setOldPass("");
           setNewPass("");
@@ -61,8 +61,8 @@ const Dashboard = props => {
         }
         return data.json();
       })
-      .then(data => {
-        console.log(data);
+      .then((data) => {
+        // console.log(data);
         if (data.modal) {
           dispatch(
             modalActions.openModal({
@@ -74,10 +74,10 @@ const Dashboard = props => {
       });
   };
 
-  const liftSubmit = event => {
+  const liftSubmit = (event) => {
     event.preventDefault();
-    console.log("submitted");
-    console.log(selectedColor);
+    // console.log("submitted");
+    // console.log(selectedColor);
 
     if (
       firstName.length >= 2 &&
@@ -97,9 +97,9 @@ const Dashboard = props => {
           color: selectedColor,
         }),
       })
-        .then(data => data.json())
-        .then(data => {
-          console.log(data.header, data.message);
+        .then((data) => data.json())
+        .then((data) => {
+          // console.log(data.header, data.message);
           if (data.modal)
             dispatch(
               modalActions.openModal({
@@ -107,7 +107,7 @@ const Dashboard = props => {
                 text: data.message,
               })
             );
-          console.log("completed fetch");
+          // console.log("completed fetch");
           dispatch(refetchActions.refetch());
           setIsEditingName(false);
         });
@@ -128,11 +128,11 @@ const Dashboard = props => {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
-        .then(data => data.json())
-        .catch(data => console.log("Errored"))
-        .then(data => {
+        .then((data) => data.json())
+        .catch((data) => console.log("Errored"))
+        .then((data) => {
           if (data) {
-            console.log(data);
+            // console.log(data);
             setSelectedColor(data.color);
             setUserInfo(data);
             setFirstName(data.firstName);
@@ -144,10 +144,10 @@ const Dashboard = props => {
   }, [refetch]);
 
   useEffect(() => {
-    console.log("editing name is:" + isEditingName);
+    // console.log("editing name is:" + isEditingName);
   }, [isEditingName]);
 
-  const colorChangeHandler = color => {
+  const colorChangeHandler = (color) => {
     setSelectedColor(color.hex);
   };
 
@@ -179,7 +179,8 @@ const Dashboard = props => {
                       },
                     })
                   );
-                }}>
+                }}
+              >
                 <img
                   src={`https://apis.ssdevelopers.xyz/${userInfo.profilePicture}`}
                   alt="hello"
@@ -203,16 +204,18 @@ const Dashboard = props => {
                   <>
                     <input
                       placeholder="firstname"
-                      onChange={event => {
+                      onChange={(event) => {
                         setFirstName(event.target.value);
                       }}
-                      value={firstName}></input>
+                      value={firstName}
+                    ></input>
                     <input
                       placeholder="lastname"
-                      onChange={event => {
+                      onChange={(event) => {
                         setLastName(event.target.value);
                       }}
-                      value={lastName}></input>
+                      value={lastName}
+                    ></input>
                   </>
                 ) : (
                   <h1
@@ -221,7 +224,8 @@ const Dashboard = props => {
                       userInfo.firstName.length + userInfo.lastName.length >= 20
                         ? { fontSize: "3rem" }
                         : { fontSize: "4rem" }
-                    }>
+                    }
+                  >
                     {userInfo.firstName} {userInfo.lastName}
                   </h1>
                 )}
@@ -241,7 +245,8 @@ const Dashboard = props => {
                       "Unfortunately if you wanted to change your email you must make a new SS Account.\nThis is for the sake of your own security"
                     );
                   }
-                }}>
+                }}
+              >
                 <h3 className="">{userInfo.email}</h3>
               </div>
 
@@ -268,31 +273,28 @@ const Dashboard = props => {
           <h1 className="bar__header">Authentication</h1>
           <form className="bar dashAuth" onSubmit={authSubmitHandler}>
             <input
-              type="text"
               type="password"
               placeholder="Old password"
               className="dashAuth__input dashAuth__long"
               value={oldPass}
-              onChange={event => setOldPass(event.target.value)}
+              onChange={(event) => setOldPass(event.target.value)}
             />
             <div style={{ display: "flex", gap: "2rem" }}>
               <input
-                type="text"
                 type="password"
                 placeholder="New Password"
                 className="dashAuth__input"
                 value={newPass}
-                onChange={event => setNewPass(event.target.value)}
+                onChange={(event) => setNewPass(event.target.value)}
               />
               <input
-                type="text"
                 type="password"
                 placeholder={
                   isTabletOrMobile ? "Confirm Password" : "Confirm New Password"
                 }
                 className="dashAuth__input"
                 value={confirmPass}
-                onChange={event => setConfirmPass(event.target.value)}
+                onChange={(event) => setConfirmPass(event.target.value)}
               />
             </div>
             <ColoredButton color={selectedColor} type="submit" />

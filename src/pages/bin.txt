@@ -7,10 +7,10 @@
               )}`;
               break;
             case "system13":
-              console.log("SYSTEM13");
+              // console.log("SYSTEM13");
               break;
             default:
-              console.log("Something went wrong.");
+              // console.log("Something went wrong.");
           }
         });
 
@@ -19,12 +19,12 @@
         if (data.status === 200) return res;
         if (data.status === 422) {
           props.liftAuthError(res.header, res.message);
-          console.log(res.header);
+          // console.log(res.header);
           // Invalid Email;
         }
         if (data.status === 401) {
           props.liftAuthError(res.header, res.message);
-          console.log(res.header);
+          // console.log(res.header);
         } // Not Authorized
         if (data.status === 403) props.liftAuthError(res.header, res.message); // Forbidden
       });

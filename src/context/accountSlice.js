@@ -70,7 +70,7 @@ const accountSlice = createSlice({
     },
     setLanguage(state, action) {
       state.language = action.payload;
-      console.log(state.language);
+      // console.log(state.language);
     },
     setConfig(state, action) {
       state.config = {

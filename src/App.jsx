@@ -12,15 +12,15 @@ import { useSelector } from "react-redux";
 
 function App() {
   const [userInfo, setUserInfo] = useState();
-  const modalState = useSelector(state => state.modal);
+  const modalState = useSelector((state) => state.modal);
 
-  console.log(modalState);
+  // console.log(modalState);
 
   // useEffect(() => {
   //   if (localStorage.getItem("token")) localStorage.removeItem("token");
   // }, []);
 
-  const liftUserInfo = userInfo => {
+  const liftUserInfo = (userInfo) => {
     setUserInfo(userInfo);
   };
 
@@ -30,7 +30,8 @@ function App() {
         isOpen={modalState.isOpen}
         header={modalState.header}
         text={modalState.text}
-        type={modalState.type}>
+        type={modalState.type}
+      >
         <Routes>
           <Route path="login/:service" element={<Login />} />
           <Route path="signup/:service" element={<Signup />} />

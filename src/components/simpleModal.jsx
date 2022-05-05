@@ -4,13 +4,13 @@ import { useDispatch } from "react-redux";
 import { modalActions } from "../context/modalSlice";
 import { refetchActions } from "../context/refetchSlice";
 
-const SimpleModal = props => {
+const SimpleModal = (props) => {
   const [image, setImage] = useState("");
   const dispatch = useDispatch();
 
-  const submitHandler = event => {
+  const submitHandler = (event) => {
     event.preventDefault();
-    console.log("into the fetch!");
+    // console.log("into the fetch!");
 
     const profileChangeFormData = new FormData();
     profileChangeFormData.append("image", image);
@@ -22,8 +22,8 @@ const SimpleModal = props => {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
-      .then(data => {
-        console.log(data.status);
+      .then((data) => {
+        // console.log(data.status);
         if (data.status === 200) {
           dispatch(modalActions.closeModal());
           dispatch(refetchActions.refetch());
@@ -31,8 +31,8 @@ const SimpleModal = props => {
         }
         return data.json();
       })
-      .then(data => {
-        console.log(data);
+      .then((data) => {
+        // console.log(data);
         if (data.modal) {
           dispatch(
             modalActions.openModal({ header: data.header, text: data.message })
@@ -45,9 +45,8 @@ const SimpleModal = props => {
     <>
       <motion.div
         className="simpleModal__children"
-        animate={
-          props.isOpen ? { filter: "blur(1.1rem)" } : { filter: "none" }
-        }>
+        animate={props.isOpen ? { filter: "blur(1.1rem)" } : { filter: "none" }}
+      >
         {props.children}
       </motion.div>
       <div
@@ -64,11 +63,13 @@ const SimpleModal = props => {
             className="simpleModal"
             animate={
               props.isOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: -200 }
-            }>
+            }
+          >
             <h1 className="simpleModal__header">{props.header}</h1>
             <button
               className="simpleModal__close"
-              onClick={() => dispatch(modalActions.closeModal())}>
+              onClick={() => dispatch(modalActions.closeModal())}
+            >
               <i className="bx bx-window-close"></i>
             </button>
             <div className="simpleModal__content">
@@ -77,7 +78,8 @@ const SimpleModal = props => {
               {props.type.type === "CHANGE-PFP" && (
                 <form
                   className="simpleModal__changePfp"
-                  onSubmit={submitHandler}>
+                  onSubmit={submitHandler}
+                >
                   <img
                     src={props.type.userProfile}
                     alt="Profile Picture"
@@ -86,11 +88,12 @@ const SimpleModal = props => {
                   <i className="bx bxs-right-arrow simpleModal__rarr"></i>
                   <button className="simpleModal__profileButton" type="button">
                     <input
-                      onChange={event => {
+                      onChange={(event) => {
                         setImage(event.currentTarget.files[0]);
                       }}
                       type="file"
-                      accept="image/png, image/gif, image/jpeg, image/jpg"></input>
+                      accept="image/png, image/gif, image/jpeg, image/jpg"
+                    ></input>
                     {image ? (
                       <img
                         src={URL.createObjectURL(image)}

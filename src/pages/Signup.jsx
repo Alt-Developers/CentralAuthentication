@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import logo from "../assets/img/ssLogo.png";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CirclePicker } from "react-color";
 import { useState } from "react";
@@ -8,19 +8,18 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { modalActions } from "../context/modalSlice";
 
-const Signup = props => {
+const Signup = (props) => {
   const { service: params } = useParams();
   const allowedParams = ["timetables", "system13"];
   const [selectedColor, setSelectedColor] = useState({ hex: "#707070" });
   const [image, setImage] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const colorChangeHandler = color => {
+  const colorChangeHandler = (color) => {
     setSelectedColor(color);
   };
 
-  const validate = values => {
+  const validate = (values) => {
     const errors = {};
 
     if (!values.email) {
@@ -53,7 +52,7 @@ const Signup = props => {
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validate,
-    onSubmit: values => {
+    onSubmit: (values) => {
       let formData = new FormData();
 
       formData.append("email", values.email);
@@ -67,13 +66,19 @@ const Signup = props => {
       fetch("https://apis.ssdevelopers.xyz/auth/signup", {
         method: "POST",
         body: formData,
-      }).then(async data => {
+      }).then(async (data) => {
         const res = await data.json();
-        console.log(res, params);
-        if (data.status !== 200) {
+        // console.log(res);
+        if (!data.status.startsWith(2)) {
+          // console.log("error");
+          console.error();
+        } else if (res.modal) {
+          // console.log("asd");
           dispatch(
             modalActions.openModal({ header: res.header, text: res.message })
           );
+        } else {
+          // console.log("redirecting");
           window.location.href = `https://authentication.ssdevelopers.xyz/login/${params}`;
         }
       });
@@ -92,7 +97,8 @@ const Signup = props => {
         <motion.div
           className="login__modal signup"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}>
+          animate={{ opacity: 1 }}
+        >
           <div className="login__text">
             <h3>Signup</h3>
             <p>To SS account for {params.replace(":", "")}</p>
@@ -136,7 +142,8 @@ const Signup = props => {
             />
             <div
               className="signup__form--color signup__form--input"
-              style={{ borderRadius: "1.1rem 1.1rem 0 0 " }}>
+              style={{ borderRadius: "1.1rem 1.1rem 0 0 " }}
+            >
               <CirclePicker
                 width="300px"
                 onChange={colorChangeHandler}
@@ -154,7 +161,8 @@ const Signup = props => {
             <button
               className="signup__imgWrapper"
               style={{ gridArea: "image" }}
-              type="button">
+              type="button"
+            >
               {!image && <i className="bx bx-image-add"></i>}
               {image && (
                 <img
@@ -170,7 +178,7 @@ const Signup = props => {
                 name="image"
                 style={{ borderRadius: "2rem" }}
                 accept="image/*"
-                onChange={event => {
+                onChange={(event) => {
                   setImage(event.currentTarget.files[0]);
                 }}
                 className="signup__img"
@@ -183,7 +191,8 @@ const Signup = props => {
               }`}
               type="submit"
               style={{ backgroundColor: selectedColor.hex }}
-              disabled={selectedColor.hex === "#707070"}>
+              disabled={selectedColor.hex === "#707070"}
+            >
               <i className="bx bxs-chevrons-right"></i>
             </button>
           </form>
@@ -193,7 +202,8 @@ const Signup = props => {
           <motion.div
             className="login__modal"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}>
+            animate={{ opacity: 1 }}
+          >
             <div className="login__text">
               <h3>Right Service?</h3>
               <p>

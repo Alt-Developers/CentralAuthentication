@@ -6,12 +6,12 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { modalActions } from "../context/modalSlice";
 
-const Login = props => {
+const Login = (props) => {
   const { service: params } = useParams();
   const allowedParams = ["timetables", "system13"];
   const dispatch = useDispatch();
 
-  const validate = values => {
+  const validate = (values) => {
     const errors = {};
 
     if (!values.email) {
@@ -32,7 +32,7 @@ const Login = props => {
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validate,
-    onSubmit: values => {
+    onSubmit: (values) => {
       const enteredEmail = values.email;
       const enteredPass = values.password;
 
@@ -46,7 +46,7 @@ const Login = props => {
           pass: enteredPass,
         }),
       })
-        .then(async data => {
+        .then(async (data) => {
           const res = await data.json();
           if (data.status === 200) {
             return res;
@@ -56,8 +56,8 @@ const Login = props => {
             );
           }
         })
-        .then(data => {
-          console.log(data);
+        .then((data) => {
+          // console.log(data);
           localStorage.setItem("token", data.token);
           switch (params) {
             case "timetables":
@@ -73,10 +73,10 @@ const Login = props => {
 
               break;
             case "system13":
-              console.log("SYSTEM13");
+              // console.log("SYSTEM13");
               break;
             default:
-              console.log("Something went wrong.");
+            // console.log("Something went wrong.");
           }
         });
     },
@@ -96,7 +96,8 @@ const Login = props => {
         <motion.div
           className="login__modal"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}>
+          animate={{ opacity: 1 }}
+        >
           <div className="login__text">
             <h3>LOGIN</h3>
             <p>To SS account for {params.replace(":", "")}</p>
@@ -133,7 +134,8 @@ const Login = props => {
           <motion.div
             className="login__modal"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}>
+            animate={{ opacity: 1 }}
+          >
             <div className="login__text">
               <h3>Right Service?</h3>
               <p>

@@ -1,7 +1,7 @@
 import logo from "../assets/img/ssLogo.png";
 import { Link } from "react-router-dom";
 
-const Service = props => {
+const Service = (props) => {
   return (
     <section className="login">
       <img src={logo} alt="logo" className="login__logo" />
@@ -61,7 +61,7 @@ export default Service;
 //     initialValues: { email: "", password: "" },
 //     validate,
 //     onSubmit: values => {
-//       console.log(values, `To ${params}`);
+//       // console.log(values, `To ${params}`);
 //       const enteredEmail = values.email;
 //       const enteredPass = values.password;
 
@@ -77,9 +77,9 @@ export default Service;
 //       })
 //         .then(data => {
 //           if (data.status === 200) return data.json();
-//           if (data.status === 422) console.log("422"); // Invalid Email;
-//           if (data.status === 401) console.log("401"); // Not Authorized
-//           if (data.status === 403) console.log("403"); // Forbidden
+//           if (data.status === 422) // console.log("422"); // Invalid Email;
+//           if (data.status === 401) // console.log("401"); // Not Authorized
+//           if (data.status === 403) // console.log("403"); // Forbidden
 //         })
 //         .then(data => {
 //           localStorage.setItem("token", data.token);
@@ -90,10 +90,10 @@ export default Service;
 //               )}`;
 //               break;
 //             case ":system13":
-//               console.log("SYSTEM13");
+//               // console.log("SYSTEM13");
 //               break;
 //             default:
-//               console.log("Something went wrong.");
+//               // console.log("Something went wrong.");
 //           }
 //         });
 //     },

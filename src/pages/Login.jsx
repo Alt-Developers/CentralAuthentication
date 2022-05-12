@@ -5,11 +5,16 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { modalActions } from "../context/modalSlice";
+import { useEffect } from "react";
 
 const Login = (props) => {
   const { service: params } = useParams();
   const allowedParams = ["timetables", "system13"];
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.title = "Login | SS Authentication";
+  }, []);
 
   const validate = (values) => {
     const errors = {};

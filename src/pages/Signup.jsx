@@ -3,7 +3,7 @@ import logo from "../assets/img/ssLogo.png";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CirclePicker } from "react-color";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { modalActions } from "../context/modalSlice";
@@ -18,6 +18,10 @@ const Signup = (props) => {
   const colorChangeHandler = (color) => {
     setSelectedColor(color);
   };
+
+  useEffect(() => {
+    document.title = "Signup | SS Authentication";
+  }, []);
 
   const validate = (values) => {
     const errors = {};
@@ -68,12 +72,18 @@ const Signup = (props) => {
         body: formData,
       }).then(async (data) => {
         const res = await data.json();
-        // console.log(res);
-        if (!data.status.startsWith(2)) {
-          // console.log("error");
+        console.log(res, data.status);
+        if (data.status.toString().charAt(0) !== "2") {
+          console.log("error");
           console.error();
+          if (res.modal) {
+            console.log("modal with error");
+            dispatch(
+              modalActions.openModal({ header: res.header, text: res.message })
+            );
+          }
         } else if (res.modal) {
-          // console.log("asd");
+          console.log("modal without error");
           dispatch(
             modalActions.openModal({ header: res.header, text: res.message })
           );

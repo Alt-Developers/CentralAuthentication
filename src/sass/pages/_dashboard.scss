@@ -1,333 +1,345 @@
 .timetableNav {
-    width: 100%;
-    height: 7rem;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0 2.5rem 0 2.5rem;
-    text-align: center;
-    transition: all .2s;
+  width: 100%;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 2.5rem 0 2.5rem;
+  text-align: center;
+  transition: all 0.2s;
 
-    &__home {
-        color: var(--font-color);
-        font-size: 3rem;
-        margin-right: auto;
+  &__home {
+    color: var(--font-color);
+    font-size: 3rem;
+    margin-right: auto;
+  }
+
+  h3 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  img {
+    justify-self: flex-start;
+    border-radius: 50%;
+    display: inline-block;
+    object-fit: cover;
+    margin-right: 1rem;
+
+    @include respond(phone) {
+      margin-right: 0;
     }
+  }
 
-    h3 {
-        font-size: 2.5rem;
-        font-weight: 600;
-        color: #fff;
-    }
-
-    img {
-        justify-self: flex-start;
-        border-radius: 50%;
-        display: inline-block;
-        object-fit: cover;
-        margin-right: 1rem;
-
-        @include respond(phone) {
-            margin-right: 0;
-        }
-    }
-
-
-    &__pref {
-        color: #fff;
-        font-size: 3rem;
-        padding-right: 1rem;
-        margin-top: .5rem;
-    }
+  &__pref {
+    color: #fff;
+    font-size: 3rem;
+    padding-right: 1rem;
+    margin-top: 0.5rem;
+  }
 }
 
 .dashboard {
-    z-index: 1000;
-    position: absolute;
-    top: 0;
-    left: 0;
+  z-index: 1000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  &__main {
+    padding: 3rem;
+  }
+
+  &__bar {
+    height: 30rem !important;
+    overflow: hidden;
+    display: grid !important;
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: 100%;
+    grid-template-areas: "img right";
+
+    @include respond(phone) {
+      grid-template-rows: 30rem 1fr;
+      grid-template-columns: 100%;
+      grid-template-areas: "img" "right";
+      height: fit-content !important;
+    }
+  }
+
+  &__profileDiv {
+    grid-area: img;
+
+    display: grid;
+    place-items: center;
+  }
+
+  &__profile {
+    height: 22rem;
+    width: 22rem;
+    object-fit: cover;
+    border-radius: 2rem;
+
+    @include respond(phone) {
+      width: 30rem;
+      height: 30rem;
+    }
+  }
+
+  &__right {
+    grid-area: right;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     width: 100%;
+    // height: 50%;
+
+    @include respond(phone) {
+      // gap: 1rem;
+      width: 100%;
+    }
+  }
+
+  &__profileButton {
+    background: transparent;
+    border: none;
+    position: relative;
+    transition: all 0.2s;
+    border-radius: 3rem;
+
+    img {
+      filter: brightness(0.7);
+      transition: all 0.2s;
+    }
+
+    i {
+      color: #fff;
+      font-size: 4rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.2s;
+    }
+
+    &:active {
+      scale: 0.9;
+    }
+  }
+
+  &__email {
+    margin-left: 1rem;
+    background-color: var(--gray-light-3);
+    border-radius: 1.1rem;
+    padding: 1.5rem;
+    overflow-x: hidden;
+
+    height: 7rem;
+    display: flex;
+
+    @include respond(phone) {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    h3 {
+      color: var(--font-color);
+      font-size: 2rem;
+      align-self: center;
+      padding-left: 1rem;
+    }
+  }
+
+  &__color {
+    margin-top: 2rem;
+    margin-left: 1rem;
+    display: flex;
+    width: 100%;
+    height: 6rem;
+    gap: 3rem;
+
+    @include respond(phone) {
+      flex-direction: column;
+      height: fit-content;
+      margin-top: 0;
+      margin-left: 0;
+    }
+  }
+
+  &__picker {
+    margin-top: 1rem;
+
+    @include respond(phone) {
+      margin-top: 0rem;
+      background-color: var(--gray-light-3);
+      width: 100%;
+      padding: 2rem;
+      height: clamp(6rem, 6rem, 10rem);
+      border-radius: 1.1rem;
+    }
+  }
+
+  &__name {
+    display: flex;
+    margin-top: 1rem;
+
+    @include respond(phone) {
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
 
     h1 {
-        color: var(--font-color);
-        font-size: 3rem;
+      font-size: 4rem;
+      padding-left: 1rem;
+      width: 100%;
+
+      @include respond(phone) {
+        padding-left: 0;
+        width: 65vw;
+        font-size: 4rem;
+      }
     }
 
-    &__main {
-        padding: 3rem;
-
-        @include respond(phone) {
-            padding: 2rem;
-        }
+    button {
+      height: 5rem;
+      width: 5rem;
+      justify-self: right;
+      grid-area: edit;
+      background: transparent;
+      border: none;
+      border-radius: 1.1rem;
+      transition: all 0.2s;
+      margin-left: auto;
     }
 
-    &__profile {
-        width: 25rem;
-        height: 25rem;
-        border-radius: 3rem;
-        object-fit: cover;
-        margin: 1rem;
-
-        @include respond(phone) {
-            margin: 0;
-        }
+    i {
+      font-size: 4rem;
+      color: var(--font-color);
     }
 
-    &__profileButton {
-        background: transparent;
-        border: none;
-        position: relative;
-        transition: all .2s;
-        border-radius: 3rem;
-        
-        img {
-            filter: brightness(.7);
-            transition: all .2s;
-        }
+    input {
+      background-color: var(--gray-light-3);
+      border-radius: 1.1rem;
+      padding: 1.5rem;
+      height: 7rem;
+      display: flex;
+      width: 50%;
+      border: none;
+      margin-left: 1rem;
+      color: var(--font-color);
+      transition: all 0.1s cubic-bezier(0.61, 1, 0.88, 1);
+      font-size: 2rem;
+      font-weight: 600;
 
-        i {
-            color: #fff;
-            font-size: 4rem;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: all .2s;
-        }
+      @include respond(phone) {
+        margin-left: 0;
+      }
 
-        &:active {
-            scale: .9;
-        }
+      // &::-webkit-input-placeholder, &::-moz-placeholder, &::-ms-input-placeholder {
+      //     font-weight: 500;
+      //     color: orangered;
+      // }
+
+      &:focus {
+        box-shadow: 0px 0px 20px #fff;
+        border: #fff 3px solid;
+      }
     }
-
-    &__email {   
-        margin-left: 1rem;
-        background-color: var(--gray-light-3);
-        border-radius: 1.1rem;
-        padding: 1.5rem;
-        overflow-x: hidden;
-
-        height: 7rem;
-        display: flex;
-        width: 99%;
-
-        @include respond(phone) {
-            width: 100%;
-            margin-left: 0;
-        }
-
-        h3 {
-            color: var(--font-color);
-            font-size: 2rem;
-            align-self: center;
-            padding-left: 1rem;
-        }
-    }
-
-    &__color {
-        margin-left: 1rem;
-        margin-top: 2rem;
-        display: flex;
-        width: 100%;
-        height: 6rem;
-        gap: 3rem;
-
-        @include respond(phone) {
-            flex-direction: column;
-            height: fit-content;
-            margin-top: 0;
-            margin-left: 0;
-        }
-    }
-
-    &__picker {
-        margin-top: 1rem;
-
-        @include respond(phone) {
-            margin-top: 0rem;
-            background-color: var(--gray-light-3);
-            width: 100%;
-            padding: 2rem;
-            height: clamp(6rem, 6rem, 10rem);
-            border-radius: 1.1rem;
-        }
-    }
-
-    &__right {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        width: 80%;
-        height: fit-content;
-        // height: 50%;
-
-        @include respond(phone) {
-            // gap: 0;
-            width: 100%;
-        }
-    }
-
-    &__name {
-        display: flex;
-        margin-top: 1rem;
-
-        @include respond(phone) {
-            gap: 1rem;
-        }
-
-        h1 {
-            font-size: 4rem;
-            padding-left: 1rem;
-            width: 100%;
-
-            @include respond(phone) {
-                padding-left: 0;
-                width: 65vw;
-                font-size: 4rem;
-            }
-        }
-
-        button {
-            height: 5rem;
-            width: 5rem;
-            justify-self: right;
-            grid-area: edit;
-            background: transparent;
-            border: none;
-            border-radius: 1.1rem;
-            transition: all .2s;
-            margin-left: auto;
-        }
-
-        i {
-            font-size: 4rem;
-            color: var(--font-color);
-        }
-
-        input {
-            background-color: var(--gray-light-3);
-            border-radius: 1.1rem;
-            padding: 1.5rem;
-            height: 7rem;
-            display: flex;
-            width: 50%;
-            border: none;
-            margin-left: 1rem;
-            color: var(--font-color);
-            transition: all .1s cubic-bezier(0.61, 1, 0.88, 1);
-            font-size: 2rem;
-            font-weight: 600;
-
-            @include respond(phone) {
-                margin-left: 0;
-            }
-
-            // &::-webkit-input-placeholder, &::-moz-placeholder, &::-ms-input-placeholder {
-            //     font-weight: 500;
-            //     color: orangered;
-            // }
-
-            &:focus {
-                box-shadow: 0px 0px 20px #fff;
-                border: #fff 3px solid;
-            }
-        }
-
-
-    }
+  }
 }
 
 .bar {
-    width: 100%;
-    background-color: var(--gray-light-1);
+  width: 100%;
+  background-color: var(--gray-light-1);
+  height: fit-content;
+  border-radius: 1.1rem;
+  display: flex;
+  padding: 3rem;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  border: none;
+  transition: all 0.2s;
+
+  // Remove scrollbar
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  filter: drop-shadow(0px 4px 22px rgba(0, 0, 0, 0.25));
+
+  @include respond(phone) {
     height: fit-content;
-    border-radius: 1.1rem;
-    display: flex;
-    padding: 3rem;
-    gap: 2rem;
-    margin-bottom: 4rem;
-    border: none;
-    transition: all .2s;
+    flex-direction: column;
+    padding: 2.5rem;
+    // background-color: transparent;
+    margin-bottom: 2rem;
+    gap: 1rem;
+  }
 
-    // Remove scrollbar
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  &__header {
+    margin-bottom: 1.5rem;
+    font-size: 3rem;
+    margin-left: 2rem;
+    color: var(--font-color);
 
-    filter: drop-shadow(0px 4px 22px rgba(0, 0, 0, 0.25));
-    
     @include respond(phone) {
-        height: fit-content;
-        flex-direction: column;
-        padding: 2.5rem;
-        // background-color: transparent;
-        margin-bottom: 2rem;
-        gap: 1rem;
+      margin-left: 1rem;
     }
+  }
 
-    &__header {
-        margin-bottom: 1.5rem;
-        font-size: 3rem;
-        margin-left: 2rem;
-        color: var(--font-color);
+  &__icon {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
 
-        @include respond(phone) {
-            margin-left: 1rem;
-        }
+    @include respond(phone) {
+      width: 70px;
+      height: 70px;
     }
-
-    &__icon {
-        position: absolute;
-        right: 2rem;
-        bottom: 2rem;
-
-        @include respond(phone) {
-            width: 70px;
-            height: 70px;
-        }
-    }
+  }
 }
 
 .dashAuth {
-    padding: 3rem;
-    height: 22rem;
+  padding: 3rem;
+  height: 22rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @include respond(phone) {
+    height: fit-content;
+    padding: 2.5rem;
+  }
+
+  &__input {
+    background-color: var(--gray-light-3);
+    border-radius: 1.1rem;
+    padding: 1.5rem;
+    height: 7rem;
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    width: 30%;
+    border: none;
+    color: var(--font-color);
+    transition: all 0.1s cubic-bezier(0.61, 1, 0.88, 1);
+    font-size: 2rem;
+    font-weight: 600;
 
     @include respond(phone) {
-        height: fit-content;
-        padding: 2.5rem;
+      width: 100%;
+      display: inline-block;
     }
 
-    &__input {
-        background-color: var(--gray-light-3);
-        border-radius: 1.1rem;
-        padding: 1.5rem;
-        height: 7rem;
-        display: flex;
-        width: 30%;
-        border: none;
-        color: var(--font-color);
-        transition: all .1s cubic-bezier(0.61, 1, 0.88, 1);
-        font-size: 2rem;
-        font-weight: 600;
-
-        @include respond(phone) {
-            width: 100%;
-            display: inline-block;
-        }
-
-        &:focus {
-            box-shadow: 0px 0px 20px #fff;
-            border: #fff 3px solid;
-        }
+    &:focus {
+      box-shadow: 0px 0px 20px #fff;
+      border: #fff 3px solid;
     }
+  }
 
-    &__long {
-        width: 100%;
+  &__long {
+    width: 100%;
 
-        @include respond(phone) {
-            width: 100%;
-        }
+    @include respond(phone) {
+      width: 100%;
     }
+  }
 }

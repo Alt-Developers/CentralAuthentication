@@ -163,40 +163,42 @@ const Dashboard = (props) => {
         </section>
         <main className="dashboard__main">
           <h1 className="bar__header">Dashboard</h1>
-          <div className={`bar`}>
-            {isEditingName ? (
-              <button
-                className="dashboard__profileButton"
-                style={{ width: "fit-content" }}
-                onClick={() => {
-                  dispatch(
-                    modalActions.openModal({
-                      header: "Change Your Profile Picture",
-                      text: "Drag and drop your photo or click the box bellow",
-                      type: {
-                        type: "CHANGE-PFP",
-                        userProfile: `https://apis.ssdevelopers.xyz/${userInfo.profilePicture}`,
-                      },
-                    })
-                  );
-                }}
-              >
+          <div className={`bar dashboard__bar`}>
+            <div className="dashboard__profileDiv">
+              {isEditingName ? (
+                <button
+                  className="dashboard__profileButton"
+                  style={{ width: "fit-content" }}
+                  onClick={() => {
+                    dispatch(
+                      modalActions.openModal({
+                        header: "Change Your Profile Picture",
+                        text: "Drag and drop your photo or click the box bellow",
+                        type: {
+                          type: "CHANGE-PFP",
+                          userProfile: `https://apis.ssdevelopers.xyz/${userInfo.profilePicture}`,
+                        },
+                      })
+                    );
+                  }}
+                >
+                  <img
+                    src={`https://apis.ssdevelopers.xyz/${userInfo.profilePicture}`}
+                    alt="hello"
+                    height={"25rem"}
+                    width={"25rem"}
+                    className="dashboard__profile"
+                  />
+                  <i className="bx bx-image-add"></i>
+                </button>
+              ) : (
                 <img
                   src={`https://apis.ssdevelopers.xyz/${userInfo.profilePicture}`}
                   alt="hello"
-                  height={"25rem"}
-                  width={"25rem"}
                   className="dashboard__profile"
                 />
-                <i className="bx bx-image-add"></i>
-              </button>
-            ) : (
-              <img
-                src={`https://apis.ssdevelopers.xyz/${userInfo.profilePicture}`}
-                alt="hello"
-                className="dashboard__profile"
-              />
-            )}
+              )}
+            </div>
 
             <form className="dashboard__right" onSubmit={liftSubmit}>
               <div className="dashboard__name">
@@ -263,7 +265,7 @@ const Dashboard = (props) => {
                     "#c842f5",
                     "#fa46c7",
                   ]}
-                  circleSize={isTabletOrMobile ? 21 : 40}
+                  circleSize={isTabletOrMobile ? 21 : 34}
                 />
                 <ColoredButton color={selectedColor} type="submit" />
               </div>

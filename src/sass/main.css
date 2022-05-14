@@ -40,8 +40,14 @@ html[data-theme="dark"] {
   font-family: "Ubuntu", sans-serif; }
 
 html {
-  font-size: 62.5%;
+  font-size: 55%;
   scroll-behavior: smooth; }
+  @media only screen and (min-width: 112.5em) {
+    html {
+      font-size: 62.5%; } }
+  @media only screen and (max-width: 37.5em) {
+    html {
+      font-size: 60%; } }
 
 body {
   background-color: var(--background-color); }
@@ -350,7 +356,6 @@ p {
   .login__modal {
     position: relative;
     background-color: #e9e6e6;
-    opacity: 0.7;
     border-radius: 1.1rem;
     height: 50rem;
     width: 40rem;
@@ -519,7 +524,7 @@ p {
   justify-content: flex-end;
   padding: 0 2.5rem 0 2.5rem;
   text-align: center;
-  transition: all .2s; }
+  transition: all 0.2s; }
   .timetableNav__home {
     color: var(--font-color);
     font-size: 3rem;
@@ -541,7 +546,7 @@ p {
     color: #fff;
     font-size: 3rem;
     padding-right: 1rem;
-    margin-top: .5rem; }
+    margin-top: 0.5rem; }
 
 .dashboard {
   z-index: 1000;
@@ -549,32 +554,52 @@ p {
   top: 0;
   left: 0;
   width: 100%; }
-  .dashboard h1 {
-    color: var(--font-color);
-    font-size: 3rem; }
   .dashboard__main {
     padding: 3rem; }
+  .dashboard__bar {
+    height: 30rem !important;
+    overflow: hidden;
+    display: grid !important;
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: 100%;
+    grid-template-areas: "img right"; }
     @media only screen and (max-width: 37.5em) {
-      .dashboard__main {
-        padding: 2rem; } }
+      .dashboard__bar {
+        grid-template-rows: 30rem 1fr;
+        grid-template-columns: 100%;
+        grid-template-areas: "img" "right";
+        height: fit-content !important; } }
+  .dashboard__profileDiv {
+    grid-area: img;
+    display: grid;
+    place-items: center; }
   .dashboard__profile {
-    width: 25rem;
-    height: 25rem;
-    border-radius: 3rem;
+    height: 22rem;
+    width: 22rem;
     object-fit: cover;
-    margin: 1rem; }
+    border-radius: 2rem; }
     @media only screen and (max-width: 37.5em) {
       .dashboard__profile {
-        margin: 0; } }
+        width: 30rem;
+        height: 30rem; } }
+  .dashboard__right {
+    grid-area: right;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%; }
+    @media only screen and (max-width: 37.5em) {
+      .dashboard__right {
+        width: 100%; } }
   .dashboard__profileButton {
     background: transparent;
     border: none;
     position: relative;
-    transition: all .2s;
+    transition: all 0.2s;
     border-radius: 3rem; }
     .dashboard__profileButton img {
       filter: brightness(0.7);
-      transition: all .2s; }
+      transition: all 0.2s; }
     .dashboard__profileButton i {
       color: #fff;
       font-size: 4rem;
@@ -582,9 +607,9 @@ p {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      transition: all .2s; }
+      transition: all 0.2s; }
     .dashboard__profileButton:active {
-      scale: .9; }
+      scale: 0.9; }
   .dashboard__email {
     margin-left: 1rem;
     background-color: var(--gray-light-3);
@@ -592,8 +617,7 @@ p {
     padding: 1.5rem;
     overflow-x: hidden;
     height: 7rem;
-    display: flex;
-    width: 99%; }
+    display: flex; }
     @media only screen and (max-width: 37.5em) {
       .dashboard__email {
         width: 100%;
@@ -604,8 +628,8 @@ p {
       align-self: center;
       padding-left: 1rem; }
   .dashboard__color {
-    margin-left: 1rem;
     margin-top: 2rem;
+    margin-left: 1rem;
     display: flex;
     width: 100%;
     height: 6rem;
@@ -626,21 +650,13 @@ p {
         padding: 2rem;
         height: clamp(6rem, 6rem, 10rem);
         border-radius: 1.1rem; } }
-  .dashboard__right {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    width: 80%;
-    height: fit-content; }
-    @media only screen and (max-width: 37.5em) {
-      .dashboard__right {
-        width: 100%; } }
   .dashboard__name {
     display: flex;
     margin-top: 1rem; }
     @media only screen and (max-width: 37.5em) {
       .dashboard__name {
-        gap: 1rem; } }
+        gap: 1rem;
+        margin-bottom: 1rem; } }
     .dashboard__name h1 {
       font-size: 4rem;
       padding-left: 1rem;
@@ -658,7 +674,7 @@ p {
       background: transparent;
       border: none;
       border-radius: 1.1rem;
-      transition: all .2s;
+      transition: all 0.2s;
       margin-left: auto; }
     .dashboard__name i {
       font-size: 4rem;
@@ -693,7 +709,7 @@ p {
   gap: 2rem;
   margin-bottom: 4rem;
   border: none;
-  transition: all .2s;
+  transition: all 0.2s;
   -ms-overflow-style: none;
   scrollbar-width: none;
   filter: drop-shadow(0px 4px 22px rgba(0, 0, 0, 0.25)); }

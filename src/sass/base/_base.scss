@@ -6,8 +6,16 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 55%;
   scroll-behavior: smooth;
+
+  @include respond(big-desktop) {
+    font-size: 62.5%;
+  }
+
+  @include respond(phone) {
+    font-size: 60%;
+  }
 }
 
 body {

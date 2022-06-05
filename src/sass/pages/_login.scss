@@ -138,3 +138,50 @@
     }
   }
 }
+
+.port {
+  &__modal {
+    padding: 2rem;
+    position: relative;
+    border: solid 1px #35353530;
+    background-color: #ffffff30;
+    border-radius: 1.1rem;
+    height: 50rem;
+    width: 85rem;
+    z-index: 10;
+    backdrop-filter: blur(40px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+
+    @include respond(phone) {
+      position: absolute;
+      bottom: 0;
+      height: 100vh;
+      width: 100vw;
+      border-radius: 0;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+  }
+
+  &__left {
+    background-color: var(--gray-light-1);
+    border-radius: 1.1rem;
+    padding: 2rem;
+    position: relative;
+
+    &Input {
+      background-color: var(--gray-dark-1);
+    }
+  }
+
+  &__right {
+    border-radius: 1.1rem;
+    padding: 2rem;
+    background-color: var(--gray-light-1);
+    position: relative;
+  }
+}

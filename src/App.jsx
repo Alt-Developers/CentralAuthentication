@@ -9,10 +9,12 @@ import { useState } from "react";
 import Redirect from "./pages/Redirect";
 import Dashboard from "./pages/Dashboard";
 import { useSelector } from "react-redux";
+import Developer from "./pages/Developer";
 
 function App() {
   const [userInfo, setUserInfo] = useState();
   const modalState = useSelector((state) => state.modal);
+  const [isDeveloper, setIsDeveloper] = useState(false);
 
   // console.log(modalState);
 
@@ -22,6 +24,9 @@ function App() {
 
   const liftUserInfo = (userInfo) => {
     setUserInfo(userInfo);
+  };
+  const liftIsDeveloper = (isDeveloper) => {
+    setIsDeveloper(isDeveloper);
   };
 
   return (
@@ -33,12 +38,19 @@ function App() {
         type={modalState.type}
       >
         <Routes>
-          <Route path="login/:service" element={<Login />} />
+          <Route
+            path="login/:service"
+            element={<Login liftIsDeveloper={liftIsDeveloper} />}
+          />
           <Route path="signup/:service" element={<Signup />} />
+          {isDeveloper && (
+            <Route path="developer/:service" element={<Developer />} />
+          )}
           <Route
             path="redirect"
             element={<Redirect liftUserInfo={liftUserInfo} />}
           />
+
           <Route path="dashboard" element={<Dashboard userInfo={userInfo} />} />
           <Route path="*" element={<Select />} />
         </Routes>

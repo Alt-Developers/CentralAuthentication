@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import logo from "../assets/img/ssLogo.png";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { modalActions } from "../context/modalSlice";
@@ -11,6 +11,7 @@ const Login = (props) => {
   const { service: params } = useParams();
   const allowedParams = ["timetables", "system13"];
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "Login | SS Authentication";
@@ -64,17 +65,26 @@ const Login = (props) => {
         .then((data) => {
           // console.log(data);
           localStorage.setItem("token", data.token);
+
+          console.log(data);
+
+          if (data.accType === "developer") {
+            console.log("Is Developer");
+            props.liftIsDeveloper(true);
+            navigate("/developer/timetables", { replace: true });
+          }
+
           switch (params) {
             case "timetables":
-              if (data.isNewUser) {
-                window.location.href = `https://timetables.ssdevelopers.xyz/token?to=setup&token=${localStorage.getItem(
-                  "token"
-                )}`;
-              } else {
-                window.location.href = `https://timetables.ssdevelopers.xyz/token?to=home&token=${localStorage.getItem(
-                  "token"
-                )}`;
-              }
+              // if (data.isNewUser) {
+              //   window.location.href = `https://timetables.ssdevelopers.xyz/token?to=setup&token=${localStorage.getItem(
+              //     "token"
+              //   )}`;
+              // } else {
+              //   window.location.href = `https://timetables.ssdevelopers.xyz/token?to=home&token=${localStorage.getItem(
+              //     "token"
+              //   )}`;
+              // }
 
               break;
             case "system13":

@@ -13,15 +13,11 @@ const Developer = (props) => {
 
   const redirectTo = (event, to) => {
     event.preventDefault();
-    if (to === "http://localhost:") {
-      window.location.href = `${to}3000/token?to=home&token=${localStorage.getItem(
-        "token"
-      )}`;
-    } else {
-      window.location.href = `${to}/token?to=home&token=${localStorage.getItem(
-        "token"
-      )}`;
-    }
+    console.log(to);
+
+    window.location.href = `${to}/token?to=home&token=${localStorage.getItem(
+      "token"
+    )}`;
   };
 
   return (
@@ -50,7 +46,7 @@ const Developer = (props) => {
               <button
                 className="port__leftButton"
                 onClick={(event) =>
-                  redirectTo(event, `http://localhost:${portNumber}`)
+                  redirectTo(event, `http://localhost:${portNumber || 3000}`)
                 }
               >
                 <i className="bx bxs-chevrons-right"></i>

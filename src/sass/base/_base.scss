@@ -1,0 +1,40 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  box-sizing: border-box;
+  background-color: var(--background);
+  min-height: 100vh;
+  font-family: "Poppins", "IBM Plex Sans Thai", sans-serif;
+  color: var(--font);
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
+}
+
+.background {
+  background-color: #fd5252;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+
+  &__logo {
+    position: fixed;
+    top: 3rem;
+    right: 3rem;
+    color: #fff;
+    font-size: 4rem;
+    font-weight: 600;
+  }
+}

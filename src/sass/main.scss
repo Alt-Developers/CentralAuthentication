@@ -1,0 +1,22 @@
+// Ubuntu + Noto Sans Thai
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+// Boxicons
+@import url("https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css");
+
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/variables";
+
+@import "base/animations";
+@import "base/base";
+@import "base/typography";
+@import "base/utilities";
+
+// @import "components/componentName";
+
+// @import "layout/footer";
+
+// @import "lib/simpleModal";
+
+@import "pages/login";

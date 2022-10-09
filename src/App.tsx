@@ -34,7 +34,10 @@ function App() {
         <Route path="/resetpassword/:token" element={<ResetPassword />} />
         <Route path="*" element={<Home allowedServies={allowedServices} />} />
       </Routes>
-      <Toaster toastOptions={{ style: toasterStyle }} />
+      <Toaster
+        toastOptions={{ style: toasterStyle }}
+        // position={"bottom-left"}
+      />
     </>
   );
 }

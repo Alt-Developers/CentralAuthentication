@@ -5,6 +5,7 @@ import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Link, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Login: React.FC<{ allowedServies: string[] }> = (props) => {
   const { service } = useParams();
@@ -23,26 +24,34 @@ const Login: React.FC<{ allowedServies: string[] }> = (props) => {
 
   const submitHandler = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    axios
-      .post("https://apis.altdevelopers.dev/auth/login", {
-        email: enteredEmail,
-        pass: enteredPassword,
-      })
-      .then((res: AxiosResponse) => {
-        console.log(res.status);
-        if (res.data.isNewUser) {
-          window.location.href = `https://timetables.altdevelopers.dev/token?to=setup&token=${res.data.token}`;
-        } else {
-          window.location.href = `https://timetables.altdevelopers.dev/token?to=home&token=${res.data.token}`;
-        }
-      })
-      .catch((err: AxiosError) => {
-        // @ts-ignore
-        if (err.response.data.modal) {
+    const fetching = new Promise((reslove, reject) => {
+      axios
+        .post("https://apis.altdevelopers.dev/auth/login", {
+          email: enteredEmail,
+          pass: enteredPassword,
+        })
+        .then((res: AxiosResponse) => {
+          console.log(res.status);
+          if (res.data.isNewUser) {
+            window.location.href = `https://timetables.altdevelopers.dev/token?to=setup&token=${res.data.token}`;
+          } else {
+            window.location.href = `https://timetables.altdevelopers.dev/token?to=home&token=${res.data.token}`;
+          }
+          reslove("Success");
+        })
+        .catch((err: AxiosError) => {
           // @ts-ignore
-          Notify(err.response.data.header);
-        }
-      });
+          if (err.response.data.modal) {
+            // @ts-ignore
+            reject(err.response.data.header);
+          }
+        });
+    });
+    toast.promise(fetching, {
+      success: "Success!",
+      loading: "Verifying User",
+      error: (err) => err.toString(),
+    });
   };
 
   if (props.allowedServies.includes(service ?? "")) {

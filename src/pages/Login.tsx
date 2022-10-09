@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import Notify from "../helper/Notify";
 
 import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
@@ -33,6 +34,13 @@ const Login: React.FC<{ allowedServies: string[] }> = (props) => {
           window.location.href = `https://timetables.altdevelopers.dev/token?to=setup&token=${res.data.token}`;
         } else {
           window.location.href = `https://timetables.altdevelopers.dev/token?to=home&token=${res.data.token}`;
+        }
+      })
+      .catch((err: AxiosError) => {
+        // @ts-ignore
+        if (err.response.data.modal) {
+          // @ts-ignore
+          Notify(err.response.data.header);
         }
       });
   };
@@ -99,10 +107,11 @@ const Login: React.FC<{ allowedServies: string[] }> = (props) => {
             The service "{uppercasedServiceName}" doesn't exist in our database
           </p>
         </div>
-        <div className="background__logo">Alternate.</div>
-        <div className="background__copy">
-          GNU General Public License v3.0 &copy; 2022 - Alternate.
-        </div>
+        {!isPhone && (
+          <div className="background__copy">
+            GNU General Public License v3.0 &copy; 2022 - Alternate.
+          </div>
+        )}
       </section>
     );
   }

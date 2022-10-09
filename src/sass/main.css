@@ -72,6 +72,9 @@ body {
     color: #fff;
     font-size: 4rem;
     font-weight: 600; }
+    @media only screen and (max-width: 56.25em) {
+      .background__logo {
+        font-size: 3rem; } }
   .background__copy {
     position: fixed;
     bottom: 3rem;
@@ -94,11 +97,16 @@ p {
 .login__floater {
   margin: 3rem;
   padding: 4rem;
-  height: 100%;
+  height: calc(100vh - 6rem);
   width: 50%;
   background-color: var(--background);
   box-shadow: 0 0 4rem #00000005;
   border-radius: 1.1rem; }
+  @media only screen and (max-width: 56.25em) {
+    .login__floater {
+      width: 100%;
+      margin: 10rem 0rem 0rem 0rem;
+      padding: 2.5rem; } }
   .login__floater h1 {
     line-height: 120%;
     font-size: 3rem; }
@@ -122,6 +130,9 @@ p {
     width: 50%;
     font-size: 1.5rem;
     font-family: "Poppins", "IBM Plex Sans Thai", sans-serif; }
+    @media only screen and (max-width: 56.25em) {
+      .login__fieldContainer input {
+        width: 80%; } }
     .login__fieldContainer input::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
       color: #cecece;
@@ -149,10 +160,34 @@ p {
   width: 15rem;
   margin-left: auto;
   transition: all 0.2s;
-  box-shadow: 0 0 2rem #00000005; }
+  box-shadow: 0 0 2rem #00000005;
+  font-family: "Poppins"; }
   .login__submit:hover {
     box-shadow: 0 0 2rem #fd5252;
     transform: translateY(-0.5rem); }
   .login__submit:active {
     box-shadow: 0 0 1rem #fd5252;
     transform: translateY(0); }
+
+.login__optionContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+  gap: 2rem; }
+
+.login__option {
+  width: 100%;
+  background-color: var(--light-2);
+  box-shadow: 0 0 2rem #00000005;
+  padding: 3rem;
+  color: #000;
+  font-size: 2rem;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 1.1rem;
+  transition: all 0.2s; }
+  .login__option:hover {
+    color: #fd5252;
+    transform: translateY(-0.5rem); }
+  .login__option:active {
+    transform: translateY(0rem); }

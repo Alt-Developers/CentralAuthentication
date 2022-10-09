@@ -2,19 +2,20 @@ import axios from "axios";
 
 import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import { Link, useParams } from "react-router-dom";
 
-const Login = () => {
+const Login: React.FC<{ allowedServies: string[] }> = (props) => {
   const { service } = useParams();
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
+  const isPhone = useMediaQuery({ maxWidth: 800 });
 
-  const allowedServices = ["timetables"];
   const uppercasedServiceName =
     service?.charAt(0).toUpperCase()!! + service?.slice(1);
 
   useEffect(() => {
-    allowedServices.includes(service ?? "")
+    props.allowedServies.includes(service ?? "")
       ? (document.title = `Login to ${uppercasedServiceName} | Alternate.`)
       : (document.title = `404 Not found | Alternate.`);
   });
@@ -36,7 +37,7 @@ const Login = () => {
       });
   };
 
-  if (allowedServices.includes(service ?? "")) {
+  if (props.allowedServies.includes(service ?? "")) {
     return (
       <section className="background">
         <form className="login__floater" onSubmit={submitHandler}>
@@ -70,7 +71,7 @@ const Login = () => {
 
           <div className="login__submitContainer">
             <Link to="/signup">Don't have an account?</Link>
-            <Link to="/forgetpass">Forgot your password?</Link>
+            <Link to="/forgotpassword">Forgot your password?</Link>
             <button type="submit" className="login__submit">
               Login
             </button>
@@ -78,9 +79,11 @@ const Login = () => {
         </form>
 
         <div className="background__logo">Alternate.</div>
-        <div className="background__copy">
-          GNU General Public License v3.0 &copy; 2022 - Alternate.
-        </div>
+        {!isPhone && (
+          <div className="background__copy">
+            GNU General Public License v3.0 &copy; 2022 - Alternate.
+          </div>
+        )}
       </section>
     );
   } else {

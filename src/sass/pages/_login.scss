@@ -2,11 +2,17 @@
   &__floater {
     margin: 3rem;
     padding: 4rem;
-    height: 100%;
+    height: calc(100vh - 6rem);
     width: 50%;
     background-color: var(--background);
     box-shadow: 0 0 4rem #00000005;
     border-radius: 1.1rem;
+
+    @include respond(phone) {
+      width: 100%;
+      margin: 10rem 0rem 0rem 0rem;
+      padding: 2.5rem;
+    }
 
     h1 {
       line-height: 120%;
@@ -37,6 +43,10 @@
       width: 50%;
       font-size: 1.5rem;
       font-family: "Poppins", "IBM Plex Sans Thai", sans-serif;
+
+      @include respond(phone) {
+        width: 80%;
+      }
 
       &::placeholder {
         /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -73,6 +83,7 @@
     margin-left: auto;
     transition: all 0.2s;
     box-shadow: 0 0 2rem #00000005;
+    font-family: "Poppins";
 
     &:hover {
       box-shadow: 0 0 2rem #fd5252;
@@ -82,6 +93,35 @@
     &:active {
       box-shadow: 0 0 1rem #fd5252;
       transform: translateY(0);
+    }
+  }
+
+  &__optionContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    gap: 2rem;
+  }
+
+  &__option {
+    width: 100%;
+    background-color: var(--light-2);
+    box-shadow: 0 0 2rem #00000005;
+    padding: 3rem;
+    color: #000;
+    font-size: 2rem;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 1.1rem;
+    transition: all 0.2s;
+
+    &:hover {
+      color: #fd5252;
+      transform: translateY(-0.5rem);
+    }
+
+    &:active {
+      transform: translateY(0rem);
     }
   }
 }

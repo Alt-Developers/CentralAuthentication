@@ -36,6 +36,9 @@ body {
     color: #fff;
     font-size: 4rem;
     font-weight: 600;
+    @include respond(phone) {
+      font-size: 3rem;
+    }
   }
   &__copy {
     position: fixed;

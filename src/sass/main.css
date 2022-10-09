@@ -72,6 +72,15 @@ body {
     color: #fff;
     font-size: 4rem;
     font-weight: 600; }
+  .background__copy {
+    position: fixed;
+    bottom: 3rem;
+    right: 3rem;
+    color: #fff;
+    opacity: 0.5;
+    font-size: 1.5rem;
+    width: 20vw;
+    text-align: right; }
 
 h1 {
   font-size: 3rem; }
@@ -111,7 +120,8 @@ p {
     box-shadow: 0 0 4rem #00000010;
     padding: 2rem;
     width: 50%;
-    font-size: 1.5rem; }
+    font-size: 1.5rem;
+    font-family: "Poppins", "IBM Plex Sans Thai", sans-serif; }
     .login__fieldContainer input::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
       color: #cecece;

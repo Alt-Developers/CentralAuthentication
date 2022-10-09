@@ -53,7 +53,7 @@ const Login = () => {
             <input
               type="email"
               placeholder="example@example.com"
-              onChange={e => setEnteredEmail(e.target.value)}
+              onChange={(e) => setEnteredEmail(e.target.value)}
               value={enteredEmail}
             />
           </div>
@@ -63,7 +63,7 @@ const Login = () => {
             <input
               type="password"
               placeholder="example123"
-              onChange={e => setEnteredPassword(e.target.value)}
+              onChange={(e) => setEnteredPassword(e.target.value)}
               value={enteredPassword}
             />
           </div>
@@ -78,6 +78,9 @@ const Login = () => {
         </form>
 
         <div className="background__logo">Alternate.</div>
+        <div className="background__copy">
+          GNU General Public License v3.0 &copy; 2022 - Alternate.
+        </div>
       </section>
     );
   } else {
@@ -93,7 +96,10 @@ const Login = () => {
             The service "{uppercasedServiceName}" doesn't exist in our database
           </p>
         </div>
-        <div className="background__logo">Alt.</div>
+        <div className="background__logo">Alternate.</div>
+        <div className="background__copy">
+          GNU General Public License v3.0 &copy; 2022 - Alternate.
+        </div>
       </section>
     );
   }

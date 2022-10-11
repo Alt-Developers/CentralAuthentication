@@ -24,11 +24,11 @@ const Login: React.FC<{ allowedServies: string[] }> = props => {
 
   const submitHandler = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    const fetching = new Promise((reslove, reject) => {
+    const fetching = new Promise((resolve, reject) => {
       axios
         .post("https://apis.altdevelopers.dev/auth/login", {
           email: enteredEmail,
-          pass: enteredPassword,
+          password: enteredPassword,
         })
         .then((res: AxiosResponse) => {
           console.log(res.status);
@@ -37,13 +37,13 @@ const Login: React.FC<{ allowedServies: string[] }> = props => {
           } else {
             window.location.href = `https://timetables.altdevelopers.dev/token?to=home&token=${res.data.token}`;
           }
-          reslove("Success");
+          resolve("Success");
         })
         .catch((err: AxiosError) => {
           // @ts-ignore
           if (err.response.data.modal) {
             // @ts-ignore
-            reject(err.response.data.header);
+            reject(err.response.data.message);
           }
         });
     });
@@ -69,7 +69,7 @@ const Login: React.FC<{ allowedServies: string[] }> = props => {
           <div className="login__fieldContainer">
             <p>Email</p>
             <input
-              type="email"
+              type="text"
               placeholder="example@example.com"
               onChange={e => setEnteredEmail(e.target.value)}
               value={enteredEmail}

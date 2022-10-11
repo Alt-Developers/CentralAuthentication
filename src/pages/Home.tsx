@@ -33,7 +33,7 @@ const Home: React.FC<{ allowedServies: string[] }> = props => {
       <div className="background__logo">Alternate.</div>
       {!isPhone && (
         <div className="background__copy">
-          GNU General Public License v3.0 &copy; 2022 - Alternate.
+          GNU General Public License v2.0 &copy; 2022 - Alternate.
         </div>
       )}
     </section>

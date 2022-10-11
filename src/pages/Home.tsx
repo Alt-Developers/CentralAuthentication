@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 
-const Home: React.FC<{ allowedServies: string[] }> = (props) => {
+const Home: React.FC<{ allowedServies: string[] }> = props => {
   const isPhone = useMediaQuery({ maxWidth: 800 });
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Home: React.FC<{ allowedServies: string[] }> = (props) => {
         </div>
 
         <div className="login__optionContainer">
-          {props.allowedServies.map((service) => (
+          {props.allowedServies.map(service => (
             <Link to={`/login/${service}`} className="login__option">
               {service.charAt(0).toUpperCase()!! + service?.slice(1)}
             </Link>

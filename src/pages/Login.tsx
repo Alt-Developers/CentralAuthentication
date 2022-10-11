@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import { Link, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
-const Login: React.FC<{ allowedServies: string[] }> = (props) => {
+const Login: React.FC<{ allowedServies: string[] }> = props => {
   const { service } = useParams();
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
@@ -50,7 +50,7 @@ const Login: React.FC<{ allowedServies: string[] }> = (props) => {
     toast.promise(fetching, {
       success: "Success!",
       loading: "Verifying User",
-      error: (err) => err.toString(),
+      error: err => err.toString(),
     });
   };
 
@@ -71,7 +71,7 @@ const Login: React.FC<{ allowedServies: string[] }> = (props) => {
             <input
               type="email"
               placeholder="example@example.com"
-              onChange={(e) => setEnteredEmail(e.target.value)}
+              onChange={e => setEnteredEmail(e.target.value)}
               value={enteredEmail}
             />
           </div>
@@ -81,13 +81,13 @@ const Login: React.FC<{ allowedServies: string[] }> = (props) => {
             <input
               type="password"
               placeholder="example123"
-              onChange={(e) => setEnteredPassword(e.target.value)}
+              onChange={e => setEnteredPassword(e.target.value)}
               value={enteredPassword}
             />
           </div>
 
           <div className="login__submitContainer">
-            <Link to="/signup">Don't have an account?</Link>
+            <Link to="/signup/timetables">Don't have an account?</Link>
             <Link to="/forgotpassword">Forgot your password?</Link>
             <button type="submit" className="login__submit">
               Login

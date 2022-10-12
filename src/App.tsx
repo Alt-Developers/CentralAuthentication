@@ -31,7 +31,7 @@ function App() {
           path="login/:service"
           element={<Login allowedServies={allowedServices} />}
         />
-        <Route path="/signup/:service?" element={<Signup />} />
+        <Route path="/signup/:service" element={<Signup />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/resetpassword/:token" element={<ResetPassword />} />
         <Route path="*" element={<Home allowedServies={allowedServices} />} />

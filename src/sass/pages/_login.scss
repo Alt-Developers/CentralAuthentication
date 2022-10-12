@@ -7,16 +7,18 @@
     background-color: var(--background);
     box-shadow: 0 0 4rem #00000005;
     border-radius: 1.1rem;
+    position: relative;
 
     @include respond(phone) {
       width: 100%;
       margin: 10rem 0rem 0rem 0rem;
       padding: 2.5rem;
+      overflow-y: scroll;
     }
 
     h1 {
       line-height: 120%;
-      font-size: 3rem;
+      font-size: 3.5rem;
     }
   }
 
@@ -45,7 +47,7 @@
       font-family: "Poppins", "IBM Plex Sans Thai", sans-serif;
 
       @include respond(phone) {
-        width: 80%;
+        width: 100%;
       }
 
       &::placeholder {

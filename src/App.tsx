@@ -7,9 +7,11 @@ import Signup from "./pages/Signup";
 import { Toaster } from "react-hot-toast";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 function App() {
   const allowedServices = ["timetables"];
+  const isPhone = useMediaQuery({ maxWidth: "800px" });
 
   const toasterStyle = {
     minWidth: "20rem",
@@ -36,7 +38,7 @@ function App() {
       </Routes>
       <Toaster
         toastOptions={{ style: toasterStyle }}
-        // position={"bottom-left"}
+        position={isPhone ? "top-left" : "top-center"}
       />
     </>
   );

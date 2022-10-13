@@ -7,6 +7,7 @@
     @include respond(phone) {
       grid-template-columns: 1fr;
       gap: 0;
+      padding-bottom: 12rem;
     }
 
     input {

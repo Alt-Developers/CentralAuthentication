@@ -80,7 +80,7 @@ body {
     font-weight: 600; }
     @media only screen and (max-width: 56.25em) {
       .background__logo {
-        font-size: 3rem; } }
+        font-size: 2rem; } }
   .background__copy {
     position: fixed;
     bottom: 3rem;
@@ -90,6 +90,9 @@ body {
     font-size: 1.5rem;
     width: 20vw;
     text-align: right; }
+    @media only screen and (max-width: 56.25em) {
+      .background__copy {
+        display: none; } }
 
 h1 {
   font-size: 3rem; }
@@ -116,9 +119,10 @@ p {
   @media only screen and (max-width: 56.25em) {
     .login__floater {
       width: 100%;
-      margin: 10rem 0rem 0rem 0rem;
+      margin: 8rem 0rem 0rem 0rem;
       padding: 2.5rem;
-      overflow-y: scroll; } }
+      overflow-y: scroll;
+      position: static; } }
   .login__floater h1 {
     line-height: 120%;
     font-size: 3.5rem; }
@@ -155,6 +159,16 @@ p {
   display: flex;
   align-items: center;
   margin-top: 10rem; }
+  @media only screen and (max-width: 56.25em) {
+    .login__submitContainer {
+      position: fixed;
+      bottom: 0 !important;
+      left: 0 !important;
+      width: 100vw;
+      padding: 2rem;
+      background-color: var(--light-2);
+      margin: none;
+      border-radius: 2rem 2rem 0 0; } }
   .login__submitContainer a {
     font-size: 1.3rem;
     color: var(--light-text);
@@ -211,7 +225,8 @@ p {
   @media only screen and (max-width: 56.25em) {
     .signup__fieldGrid {
       grid-template-columns: 1fr;
-      gap: 0; } }
+      gap: 0;
+      padding-bottom: 12rem; } }
   .signup__fieldGrid input {
     width: 100%; }
 

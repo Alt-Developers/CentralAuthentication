@@ -44,8 +44,9 @@ body {
     color: #fff;
     font-size: 4rem;
     font-weight: 600;
+
     @include respond(phone) {
-      font-size: 3rem;
+      font-size: 2rem;
     }
   }
   &__copy {
@@ -57,5 +58,9 @@ body {
     font-size: 1.5rem;
     width: 20vw;
     text-align: right;
+
+    @include respond(phone) {
+      display: none;
+    }
   }
 }

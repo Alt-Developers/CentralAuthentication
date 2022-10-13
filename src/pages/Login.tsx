@@ -67,7 +67,7 @@ const Login: React.FC<{ allowedServies: string[] }> = props => {
           </div>
 
           <div className="login__fieldContainer">
-            <p>Email</p>
+            <p>Username / Email</p>
             <input
               type="text"
               placeholder="example@example.com"

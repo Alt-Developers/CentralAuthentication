@@ -11,9 +11,10 @@
 
     @include respond(phone) {
       width: 100%;
-      margin: 10rem 0rem 0rem 0rem;
+      margin: 8rem 0rem 0rem 0rem;
       padding: 2.5rem;
       overflow-y: scroll;
+      position: static;
     }
 
     h1 {
@@ -62,6 +63,17 @@
     display: flex;
     align-items: center;
     margin-top: 10rem;
+
+    @include respond(phone) {
+      position: fixed;
+      bottom: 0 !important;
+      left: 0 !important;
+      width: 100vw;
+      padding: 2rem;
+      background-color: var(--light-2);
+      margin: none;
+      border-radius: 2rem 2rem 0 0;
+    }
 
     a {
       font-size: 1.3rem;

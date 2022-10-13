@@ -44,6 +44,9 @@ const Signup = () => {
         })
           .then((res: AxiosResponse) => {
             console.log(res);
+            if (res.status === 200) {
+              window.location.href = `https://authentication.altdevelopers.dev/login/${service}`;
+            }
             resolve("Success");
           })
           .catch((err: Error | AxiosError) =>
@@ -170,7 +173,7 @@ const Signup = () => {
           <Link to="/login/timetables">Already have an account?</Link>
 
           <button type="submit" className="login__submit">
-            Login
+            Signup
           </button>
         </div>
       </form>

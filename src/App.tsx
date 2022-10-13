@@ -7,9 +7,11 @@ import Signup from "./pages/Signup";
 import { Toaster } from "react-hot-toast";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 function App() {
   const allowedServices = ["timetables"];
+  const isPhone = useMediaQuery({ maxWidth: "800px" });
 
   const toasterStyle = {
     minWidth: "20rem",
@@ -34,7 +36,10 @@ function App() {
         <Route path="/resetpassword/:token" element={<ResetPassword />} />
         <Route path="*" element={<Home allowedServies={allowedServices} />} />
       </Routes>
-      <Toaster toastOptions={{ style: toasterStyle }} />
+      <Toaster
+        toastOptions={{ style: toasterStyle }}
+        position={isPhone ? "top-left" : "top-center"}
+      />
     </>
   );
 }

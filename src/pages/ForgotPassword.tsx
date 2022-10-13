@@ -1,16 +1,48 @@
-import { useEffect } from "react";
+import axios from "axios";
+
+import { AxiosError, AxiosResponse } from "axios";
+import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { useMediaQuery } from "react-responsive";
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
+
   const isPhone = useMediaQuery({ maxWidth: 800 });
 
   useEffect(() => {
-    document.title = `Reset Password | Alternate.`;
+    document.title = `Forgot Password | Alternate.`;
   }, []);
+
+  const submitHandler = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+
+    const ForgotPasswordPromise = new Promise((resolve, reject) => {
+      axios
+        .get(
+          `https://apis.altdevelopers.dev/auth/forget-password?email=${email}`
+        )
+        .then((res: AxiosResponse) => {
+          console.log(res);
+          resolve(`Sent an email to ${email}`);
+        })
+        .catch((err: AxiosError | Error) => {
+          console.log(err);
+          // @ts-ignore
+          reject(err.response.data.message);
+        });
+    });
+
+    toast.promise(ForgotPasswordPromise, {
+      success: `Sent an email to ${email}`,
+      loading: "Verifying Email",
+      error: err => err.toString(),
+    });
+  };
 
   return (
     <section className="background">
-      <form className="login__floater">
+      <form className="login__floater" onSubmit={submitHandler}>
         <div className="login__title">
           <h1>
             Forgot your <span className="accent">password?</span>{" "}
@@ -23,7 +55,12 @@ const ForgotPassword = () => {
 
         <div className="login__fieldContainer">
           <p>Email Registered to Alt.</p>
-          <input type="text" placeholder="example@example.com" />
+          <input
+            type="email"
+            placeholder="example@example.com"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
         </div>
 
         <div className="login__submitContainer">

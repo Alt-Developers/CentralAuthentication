@@ -1,16 +1,16 @@
-import axios, { AxiosError } from "axios";
-import Notify from "../helper/Notify";
+import toast from "react-hot-toast";
+import axios from "axios";
 
-import { AxiosResponse } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Link, useParams } from "react-router-dom";
-import toast from "react-hot-toast";
 
 const Login: React.FC<{ allowedServies: string[] }> = props => {
   const { service } = useParams();
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
+
   const isPhone = useMediaQuery({ maxWidth: 800 });
 
   const uppercasedServiceName =
@@ -27,7 +27,7 @@ const Login: React.FC<{ allowedServies: string[] }> = props => {
     const fetching = new Promise((resolve, reject) => {
       axios
         .post("https://apis.altdevelopers.dev/auth/login", {
-          email: enteredEmail,
+          identifier: enteredEmail,
           password: enteredPassword,
         })
         .then((res: AxiosResponse) => {
@@ -45,6 +45,7 @@ const Login: React.FC<{ allowedServies: string[] }> = props => {
             // @ts-ignore
             reject(err.response.data.message);
           }
+          setEnteredPassword("");
         });
     });
     toast.promise(fetching, {

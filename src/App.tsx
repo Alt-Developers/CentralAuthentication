@@ -5,7 +5,6 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 
 import { Toaster } from "react-hot-toast";
-import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 

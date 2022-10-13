@@ -1,10 +1,12 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios from "axios";
 import Notify from "../helper/Notify";
 
+import { AxiosError, AxiosResponse } from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { useEffect } from "react";
 
 const Signup = () => {
   const { service } = useParams();
@@ -14,6 +16,10 @@ const Signup = () => {
   const [avatar, setAvatar] = useState<Blob | string>("");
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
+
+  useEffect(() => {
+    document.title = `Signup | Alternate.`;
+  }, []);
 
   const submitHandler = (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -26,7 +32,6 @@ const Signup = () => {
         "Password must have at least 8 letters, 1 Alphabetical Character, 1 Number"
       );
     } else {
-      // Send information to back-end
       const signupFormData = new FormData();
       signupFormData.append("name", name);
       signupFormData.append("username", username);
@@ -35,7 +40,7 @@ const Signup = () => {
       signupFormData.append("cpassword", confirmationPassword);
       signupFormData.append("image", avatar);
 
-      const fetching = new Promise((resolve, reject) => {
+      const signupPromise = new Promise((resolve, reject) => {
         axios({
           method: "post",
           url: "https://apis.altdevelopers.dev/auth/signup",
@@ -44,7 +49,7 @@ const Signup = () => {
         })
           .then((res: AxiosResponse) => {
             console.log(res);
-            if (res.status === 200) {
+            if (res.status === 201) {
               window.location.href = `https://authentication.altdevelopers.dev/login/${service}`;
             }
             resolve("Success");
@@ -54,7 +59,8 @@ const Signup = () => {
             reject(err.response.data.message)
           );
       });
-      toast.promise(fetching, {
+
+      toast.promise(signupPromise, {
         success: "Success!",
         loading: "Verifying User",
         error: err => err.toString(),

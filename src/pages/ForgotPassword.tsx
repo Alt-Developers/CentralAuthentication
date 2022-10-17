@@ -4,9 +4,11 @@ import { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useMediaQuery } from "react-responsive";
+import { useParams } from "react-router-dom";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
+  const { token } = useParams();
 
   const isPhone = useMediaQuery({ maxWidth: 800 });
 
